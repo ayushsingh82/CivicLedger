@@ -35,20 +35,28 @@ export default function Home() {
   if (!showDashboard) {
     return (
       <div className="min-h-screen bg-white" style={{ fontFamily: "'Courier New', monospace" }}>
+        {/* Header */}
+        <header className="absolute top-0 left-0 p-6 z-10">
+          <div className="bg-[#BA867B] px-6 py-4" style={{ borderRight: '8px solid #8b675a', borderBottom: '8px solid #8b675a' }}>
+            <h1 className="text-2xl font-bold text-white tracking-wide">PrivacyLedger</h1>
+            <p className="text-sm font-semibold text-black">Powered by Constellation Network</p>
+          </div>
+        </header>
+
         {/* Hero Section */}
         <section className="flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-5xl">
-            <h2 className="text-8xl font-bold text-black mb-12 tracking-tight leading-tight">
+            <h2 className="text-7xl font-bold text-black mb-12 tracking-tight leading-tight">
               GDPR Compliance on the{' '}
               <span className="text-[#BA867B]">Hypergraph</span>
             </h2>
-            <p className="text-4xl text-gray-700 mb-20 leading-relaxed px-4">
+            <p className="text-2xl text-gray-700 mb-20 leading-tight px-4">
               Immutable consent records, automated data subject rights, and verifiable audit trails
               powered by Constellation Network's feeless architecture
             </p>
             <button
               onClick={() => setShowDashboard(true)}
-              className="px-20 py-8 bg-[#BA867B] text-white text-3xl font-bold uppercase hover:opacity-90 transition-all duration-200"
+              className="px-4 py-2 bg-[#BA867B] text-white text-3xl font-bold uppercase hover:opacity-90 transition-all duration-200"
               style={{ borderRight: '8px solid #8b675a', borderBottom: '8px solid #8b675a' }}
             >
               Get Started
@@ -67,12 +75,10 @@ export default function Home() {
         <div className="px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-[#BA867B] flex items-center justify-center" style={{ borderRight: '4px solid #8b675a', borderBottom: '4px solid #8b675a' }}>
-                <span className="text-white font-bold text-xl">🌌</span>
-              </div>
+              
               <div>
                 <h1 className="text-xl font-bold text-black tracking-wide">PrivacyLedger</h1>
-                <p className="text-xs text-gray-600">Powered by Constellation Network</p>
+                <p className="text-xs font-medium text-black">Powered by Constellation Network</p>
               </div>
             </div>
             <button
