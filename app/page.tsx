@@ -137,7 +137,7 @@ export default function Home() {
             {activeTab === 'consent' && (
               <div>
                 <div className="mb-8">
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                  <h3 className="text-2xl font-bold text-white mb-4">
                     Record New Consent
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -145,19 +145,19 @@ export default function Home() {
                       (type) => (
                         <div
                           key={type}
-                          className="p-6 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg hover:border-blue-500 dark:hover:border-blue-400 transition-colors"
+                          className="p-6 border-2 border-dashed border-gray-400 rounded-lg hover:border-white transition-colors"
                         >
-                          <h4 className="font-semibold text-gray-900 dark:text-white mb-4">{type}</h4>
+                          <h4 className="font-semibold text-white mb-4">{type}</h4>
                           <div className="flex space-x-2">
                             <button
                               onClick={() => handleConsentAction('grant', type)}
-                              className="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                              className="flex-1 px-4 py-2 border border-gray-400 text-white rounded-lg hover:bg-white hover:text-black transition-colors"
                             >
                               Grant
                             </button>
                             <button
                               onClick={() => handleConsentAction('revoke', type)}
-                              className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+                              className="flex-1 px-4 py-2 border border-gray-400 text-white rounded-lg hover:bg-white hover:text-black transition-colors"
                             >
                               Revoke
                             </button>
@@ -169,39 +169,33 @@ export default function Home() {
                 </div>
 
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                  <h3 className="text-2xl font-bold text-white mb-4">
                     Consent History
                   </h3>
                   <div className="space-y-3">
                     {consents.map((consent) => (
                       <div
                         key={consent.id}
-                        className="p-4 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 flex items-center justify-between"
+                        className="p-4 bg-black rounded-lg border border-gray-400 flex items-center justify-between"
                       >
                         <div className="flex items-center space-x-4">
                           <div
-                            className={`w-3 h-3 rounded-full ${
-                              consent.status === 'Granted' ? 'bg-green-500' : 'bg-red-500'
-                            }`}
+                            className="w-3 h-3 rounded-full border border-gray-400"
                           />
                           <div>
-                            <p className="font-semibold text-gray-900 dark:text-white">{consent.type}</p>
-                            <p className="text-sm text-gray-600 dark:text-gray-400">
+                            <p className="font-semibold text-white">{consent.type}</p>
+                            <p className="text-sm text-gray-400">
                               {consent.timestamp}
                             </p>
                           </div>
                         </div>
                         <div className="flex items-center space-x-4">
                           <span
-                            className={`px-3 py-1 rounded-full text-sm font-medium ${
-                              consent.status === 'Granted'
-                                ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'
-                                : 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400'
-                            }`}
+                            className="px-3 py-1 rounded-full text-sm font-medium border border-gray-400"
                           >
                             {consent.status}
                           </span>
-                          <code className="text-xs text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded">
+                          <code className="text-xs text-gray-400 border border-gray-400 px-2 py-1 rounded">
                             {consent.hash}
                           </code>
                         </div>
@@ -215,7 +209,7 @@ export default function Home() {
             {/* Data Subject Rights Tab */}
             {activeTab === 'rights' && (
               <div>
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                <h3 className="text-2xl font-bold text-white mb-6">
                   Exercise Your GDPR Rights
                 </h3>
                 <div className="space-y-6">
@@ -241,19 +235,19 @@ export default function Home() {
                   ].map((right) => (
                     <div
                       key={right.title}
-                      className="p-6 border border-gray-200 dark:border-gray-700 rounded-xl hover:shadow-lg transition-shadow"
+                      className="p-6 border border-gray-400 rounded-xl transition-shadow"
                     >
                       <div className="flex items-start justify-between">
                         <div className="flex items-start space-x-4">
                           <span className="text-3xl">{right.icon}</span>
                           <div>
-                            <h4 className="font-bold text-gray-900 dark:text-white mb-2">{right.title}</h4>
-                            <p className="text-gray-600 dark:text-gray-400">{right.description}</p>
+                            <h4 className="font-bold text-white mb-2">{right.title}</h4>
+                            <p className="text-gray-400">{right.description}</p>
                           </div>
                         </div>
                         <button
                           onClick={() => handleDataRequest(right.title)}
-                          className="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors whitespace-nowrap"
+                          className="px-6 py-2 border border-gray-400 text-white rounded-lg font-medium hover:bg-white hover:text-black transition-colors whitespace-nowrap"
                         >
                           {right.action}
                         </button>
@@ -267,57 +261,57 @@ export default function Home() {
             {/* Audit Dashboard Tab */}
             {activeTab === 'audit' && (
               <div>
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                <h3 className="text-2xl font-bold text-white mb-6">
                   Compliance Metrics
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                  <div className="p-6 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl border border-green-200 dark:border-green-700">
+                  <div className="p-6 bg-black rounded-xl border border-gray-400">
                     <div className="flex items-center justify-between mb-4">
-                      <h4 className="font-bold text-gray-900 dark:text-white">Compliance Score</h4>
+                      <h4 className="font-bold text-white">Compliance Score</h4>
                       <span className="text-3xl">✅</span>
                     </div>
-                    <div className="text-4xl font-bold text-green-600 mb-2">98%</div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                    <div className="text-4xl font-bold text-white mb-2">98%</div>
+                    <p className="text-sm text-gray-400">
                       All consent records verified on-chain
                     </p>
                   </div>
 
-                  <div className="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl border border-blue-200 dark:border-blue-700">
+                  <div className="p-6 bg-black rounded-xl border border-gray-400">
                     <div className="flex items-center justify-between mb-4">
-                      <h4 className="font-bold text-gray-900 dark:text-white">Active Data Requests</h4>
+                      <h4 className="font-bold text-white">Active Data Requests</h4>
                       <span className="text-3xl">📋</span>
                     </div>
-                    <div className="text-4xl font-bold text-blue-600 mb-2">2</div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                    <div className="text-4xl font-bold text-white mb-2">2</div>
+                    <p className="text-sm text-gray-400">
                       In progress (30-day SLA)
                     </p>
                   </div>
                 </div>
 
-                <div className="bg-gray-50 dark:bg-gray-900 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
-                  <h4 className="font-bold text-gray-900 dark:text-white mb-4">Blockchain Verification</h4>
+                <div className="bg-black p-6 rounded-xl border border-gray-400">
+                  <h4 className="font-bold text-white mb-4">Blockchain Verification</h4>
                   <div className="space-y-3">
-                    <div className="flex items-center justify-between py-2 border-b border-gray-200 dark:border-gray-700">
-                      <span className="text-gray-600 dark:text-gray-400">Network</span>
-                      <span className="font-mono text-sm text-gray-900 dark:text-white">
+                    <div className="flex items-center justify-between py-2 border-b border-gray-400">
+                      <span className="text-gray-400">Network</span>
+                      <span className="font-mono text-sm text-white">
                         Constellation Hypergraph
                       </span>
                     </div>
-                    <div className="flex items-center justify-between py-2 border-b border-gray-200 dark:border-gray-700">
-                      <span className="text-gray-600 dark:text-gray-400">Protocol</span>
-                      <span className="font-mono text-sm text-gray-900 dark:text-white">
+                    <div className="flex items-center justify-between py-2 border-b border-gray-400">
+                      <span className="text-gray-400">Protocol</span>
+                      <span className="font-mono text-sm text-white">
                         HGTP (Hypergraph Transfer)
                       </span>
                     </div>
-                    <div className="flex items-center justify-between py-2 border-b border-gray-200 dark:border-gray-700">
-                      <span className="text-gray-600 dark:text-gray-400">Last Verified</span>
-                      <span className="font-mono text-sm text-gray-900 dark:text-white">
+                    <div className="flex items-center justify-between py-2 border-b border-gray-400">
+                      <span className="text-gray-400">Last Verified</span>
+                      <span className="font-mono text-sm text-white">
                         Just now
                       </span>
                     </div>
                     <div className="flex items-center justify-between py-2">
-                      <span className="text-gray-600 dark:text-gray-400">Blockchain Hash</span>
-                      <span className="font-mono text-sm text-blue-600 dark:text-blue-400">
+                      <span className="text-gray-400">Blockchain Hash</span>
+                      <span className="font-mono text-sm text-gray-400">
                         0x7f8a9b...2c3d4e
                       </span>
                     </div>
@@ -330,16 +324,16 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 dark:border-gray-700 mt-16 py-8">
+      <footer className="border-t border-gray-400 mt-16 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <p className="text-gray-600 dark:text-gray-400">
-              Built for <span className="font-semibold">LegalHack 2025</span> | Powered by{' '}
-              <span className="font-semibold text-blue-600 dark:text-blue-400">
+            <p className="text-gray-400">
+              Built for <span className="font-semibold text-white">LegalHack 2025</span> | Powered by{' '}
+              <span className="font-semibold text-white">
                 Constellation Network
               </span>
             </p>
-            <p className="text-sm text-gray-500 dark:text-gray-500 mt-2">
+            <p className="text-sm text-gray-400 mt-2">
               Immutable • Verifiable • Feeless • Scalable
             </p>
           </div>
