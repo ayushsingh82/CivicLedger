@@ -35,32 +35,8 @@ export default function Home() {
   if (!showDashboard) {
     return (
       <div className="min-h-screen bg-white" style={{ fontFamily: "'Courier New', monospace" }}>
-        {/* Header */}
-        <header className="border-b-4 border-[#BA867B] bg-white sticky top-0 z-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div className="flex justify-between items-center">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-[#BA867B] flex items-center justify-center" style={{ borderRight: '4px solid #8b675a', borderBottom: '4px solid #8b675a' }}>
-                  <span className="text-white font-bold text-xl">🌌</span>
-                </div>
-                <div>
-                  <h1 className="text-xl font-bold text-black tracking-wide">PrivacyLedger</h1>
-                  <p className="text-xs text-gray-600">Powered by Constellation Network</p>
-                </div>
-              </div>
-              <button
-                onClick={() => setShowDashboard(true)}
-                className="px-6 py-2 bg-[#BA867B] text-white font-bold uppercase hover:opacity-90 transition-all duration-200"
-                style={{ borderRight: '4px solid #8b675a', borderBottom: '4px solid #8b675a' }}
-              >
-                Get Started
-              </button>
-            </div>
-          </div>
-        </header>
-
         {/* Hero Section */}
-        <section className="flex items-center justify-center min-h-[calc(100vh-73px)] px-4 sm:px-6 lg:px-8">
+        <section className="flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-5xl">
             <h2 className="text-8xl font-bold text-black mb-12 tracking-tight leading-tight">
               GDPR Compliance on the{' '}
@@ -296,7 +272,7 @@ export default function Home() {
                 Compliance Metrics
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div className="p-8 bg-gray-50 border-2 border-[#BA867B]" style={{ borderRight: '6px solid #4a3500', borderBottom: '6px solid #4a3500' }}>
+                <div className="p-8 bg-gray-50 border-2 border-[#BA867B]" style={{ borderRight: '6px solid #8b675a', borderBottom: '6px solid #8b675a' }}>
                   <div className="flex items-center justify-between mb-4">
                     <h4 className="font-bold text-2xl text-black uppercase tracking-wide">Compliance Score</h4>
                     <span className="text-4xl">✅</span>
@@ -307,7 +283,7 @@ export default function Home() {
                   </p>
                 </div>
 
-                <div className="p-8 bg-gray-50 border-2 border-[#BA867B]" style={{ borderRight: '6px solid #4a3500', borderBottom: '6px solid #4a3500' }}>
+                <div className="p-8 bg-gray-50 border-2 border-[#BA867B]" style={{ borderRight: '6px solid #8b675a', borderBottom: '6px solid #8b675a' }}>
                   <div className="flex items-center justify-between mb-4">
                     <h4 className="font-bold text-2xl text-black uppercase tracking-wide">Active Data Requests</h4>
                     <span className="text-4xl">📋</span>
@@ -319,7 +295,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="bg-gray-50 p-8 border-2 border-[#BA867B]" style={{ borderRight: '6px solid #4a3500', borderBottom: '6px solid #4a3500' }}>
+              <div className="bg-gray-50 p-8 border-2 border-[#BA867B]" style={{ borderRight: '6px solid #8b675a', borderBottom: '6px solid #8b675a' }}>
                 <h4 className="font-bold text-2xl text-black mb-6 uppercase tracking-wide">Blockchain Verification</h4>
                 <div className="space-y-4">
                   <div className="flex items-center justify-between py-3 border-b-2 border-gray-400">
