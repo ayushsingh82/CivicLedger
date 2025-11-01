@@ -32,33 +32,33 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <div className="min-h-screen bg-black">
       {/* Header */}
-      <header className="border-b border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm sticky top-0 z-50">
+      <header className="border-b border-gray-400 bg-black sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 border border-gray-400 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-xl">🌌</span>
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900 dark:text-white">PrivacyLedger</h1>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Powered by Constellation Network</p>
+                <h1 className="text-xl font-bold text-white">PrivacyLedger</h1>
+                <p className="text-xs text-gray-400">Powered by Constellation Network</p>
               </div>
             </div>
             {!connected ? (
               <button
                 onClick={handleConnect}
-                className="px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-medium hover:shadow-lg transition-all duration-200"
+                className="px-6 py-2 border border-gray-400 text-white rounded-lg font-medium hover:bg-white hover:text-black transition-all duration-200"
               >
                 Connect Wallet
               </button>
             ) : (
               <div className="flex items-center space-x-3">
-                <div className="px-4 py-2 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-lg text-sm font-medium">
+                <div className="px-4 py-2 border border-gray-400 text-white rounded-lg text-sm font-medium">
                   Connected ✓
                 </div>
-                <button className="px-6 py-2 border border-gray-300 dark:border-gray-600 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                <button className="px-6 py-2 border border-gray-400 rounded-lg font-medium hover:bg-white hover:text-black transition-colors">
                   Disconnect
                 </button>
               </div>
@@ -70,13 +70,13 @@ export default function Home() {
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 className="text-5xl font-bold text-white mb-4">
             GDPR Compliance on the{' '}
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="underline">
               Hypergraph
             </span>
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
             Immutable consent records, automated data subject rights, and verifiable audit trails
             powered by Constellation Network's feeless architecture
           </p>
@@ -84,32 +84,32 @@ export default function Home() {
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+          <div className="bg-black p-6 rounded-xl border border-gray-400">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-3xl font-bold text-gray-900 dark:text-white">{consents.length}</span>
-              <span className="text-blue-600 text-2xl">📋</span>
+              <span className="text-3xl font-bold text-white">{consents.length}</span>
+              <span className="text-2xl">📋</span>
             </div>
-            <p className="text-gray-600 dark:text-gray-400">Consent Records</p>
+            <p className="text-gray-400">Consent Records</p>
           </div>
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+          <div className="bg-black p-6 rounded-xl border border-gray-400">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-3xl font-bold text-green-600">100%</span>
-              <span className="text-purple-600 text-2xl">✅</span>
+              <span className="text-3xl font-bold text-white">100%</span>
+              <span className="text-2xl">✅</span>
             </div>
-            <p className="text-gray-600 dark:text-gray-400">Immutable Proof</p>
+            <p className="text-gray-400">Immutable Proof</p>
           </div>
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+          <div className="bg-black p-6 rounded-xl border border-gray-400">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-3xl font-bold text-gray-900 dark:text-white">$0</span>
-              <span className="text-green-600 text-2xl">💰</span>
+              <span className="text-3xl font-bold text-white">$0</span>
+              <span className="text-2xl">💰</span>
             </div>
-            <p className="text-gray-600 dark:text-gray-400">Transaction Fees</p>
+            <p className="text-gray-400">Transaction Fees</p>
           </div>
         </div>
 
         {/* Tabs */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-          <div className="border-b border-gray-200 dark:border-gray-700">
+        <div className="bg-black rounded-2xl border border-gray-400 overflow-hidden">
+          <div className="border-b border-gray-400">
             <nav className="flex">
               {[
                 { id: 'consent', label: 'Consent Management', icon: '📝' },
@@ -121,8 +121,8 @@ export default function Home() {
                   onClick={() => setActiveTab(tab.id)}
                   className={`flex-1 px-6 py-4 font-medium transition-colors ${
                     activeTab === tab.id
-                      ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 border-b-2 border-blue-600'
-                      : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700'
+                      ? 'bg-white text-black border-b-2 border-gray-400'
+                      : 'text-gray-400 hover:bg-gray-900'
                   }`}
                 >
                   <span className="text-xl mr-2">{tab.icon}</span>
