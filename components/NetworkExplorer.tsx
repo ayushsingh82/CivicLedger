@@ -28,6 +28,12 @@ export default function NetworkExplorer({ initialTab = 'overview' }: NetworkExpl
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    if (initialTab) {
+      setActiveTab(initialTab);
+    }
+  }, [initialTab]);
+
+  useEffect(() => {
     loadData();
   }, [activeTab]);
 

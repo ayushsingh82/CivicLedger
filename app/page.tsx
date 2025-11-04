@@ -7,16 +7,11 @@ import MetagraphExplorer from '@/components/MetagraphExplorer';
 export default function Home() {
   const [showDashboard, setShowDashboard] = useState(false);
   const [activeTab, setActiveTab] = useState('consent');
-  const [connected, setConnected] = useState(false);
   const [consents, setConsents] = useState([
     { id: 1, type: 'Marketing Emails', status: 'Granted', timestamp: '2025-01-15 10:30:00', hash: '0x1a2b3c...' },
     { id: 2, type: 'Analytics Cookies', status: 'Granted', timestamp: '2025-01-15 10:32:00', hash: '0x4d5e6f...' },
     { id: 3, type: 'Third-party Sharing', status: 'Revoked', timestamp: '2025-01-16 14:20:00', hash: '0x7g8h9i...' },
   ]);
-
-  const handleConnect = () => {
-    setConnected(true);
-  };
 
   const handleConsentAction = (action: 'grant' | 'revoke', type: string) => {
     const newConsent = {
@@ -119,28 +114,19 @@ export default function Home() {
               </button>
             ))}
             <div className="pt-6 border-t-4 border-gray-400 mt-6">
-              <p className="text-xs text-gray-500 mb-4 uppercase font-bold">Hypergraph Explorer</p>
-              {[
-                { id: 'overview', label: 'Overview', icon: '📊' },
-                { id: 'wallets', label: 'Wallets', icon: '👛' },
-                { id: 'snapshots', label: 'Snapshots', icon: '📸' },
-                { id: 'transactions', label: 'Transactions', icon: '💸' },
-                { id: 'nodes', label: 'Node Explorer', icon: '🖥️' },
-              ].map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`w-full flex items-center space-x-3 px-4 py-3 font-bold uppercase transition-colors ${
-                    activeTab === tab.id
-                      ? 'bg-[#BA867B] text-white'
-                      : 'text-gray-700 hover:bg-[#BA867B] hover:text-white'
-                  }`}
-                  style={{ borderRight: activeTab === tab.id ? '4px solid #8b675a' : 'none', borderBottom: activeTab === tab.id ? '4px solid #8b675a' : 'none' }}
-                >
-                  <span className="text-2xl">{tab.icon}</span>
-                  <span className="text-left tracking-wide">{tab.label}</span>
-                </button>
-              ))}
+              <p className="text-xs text-gray-500 mb-4 uppercase font-bold">Hypergraph</p>
+              <button
+                onClick={() => setActiveTab('hypergraph')}
+                className={`w-full flex items-center space-x-3 px-4 py-3 font-bold uppercase transition-colors ${
+                  activeTab === 'hypergraph' || activeTab === 'overview' || activeTab === 'wallets' || activeTab === 'snapshots' || activeTab === 'transactions' || activeTab === 'nodes'
+                    ? 'bg-[#BA867B] text-white'
+                    : 'text-gray-700 hover:bg-[#BA867B] hover:text-white'
+                }`}
+                style={{ borderRight: (activeTab === 'hypergraph' || activeTab === 'overview' || activeTab === 'wallets' || activeTab === 'snapshots' || activeTab === 'transactions' || activeTab === 'nodes') ? '4px solid #8b675a' : 'none', borderBottom: (activeTab === 'hypergraph' || activeTab === 'overview' || activeTab === 'wallets' || activeTab === 'snapshots' || activeTab === 'transactions' || activeTab === 'nodes') ? '4px solid #8b675a' : 'none' }}
+              >
+                <span className="text-2xl">🌐</span>
+                <span className="text-left tracking-wide">Hypergraph</span>
+              </button>
             </div>
             <div className="pt-6 border-t-4 border-gray-400 mt-6">
               <p className="text-xs text-gray-500 mb-4 uppercase font-bold">Metagraphs</p>
@@ -158,30 +144,6 @@ export default function Home() {
               </button>
             </div>
           </nav>
-
-          <div className="px-6 pt-8">
-            <div className="border-t-4 border-gray-400 pt-8">
-              <p className="text-sm text-gray-600 mb-4 uppercase font-bold">Wallet Connection</p>
-              {!connected ? (
-                <button
-                  onClick={handleConnect}
-                  className="w-full px-4 py-2 bg-[#BA867B] text-white font-bold uppercase hover:opacity-90 transition-colors"
-                  style={{ borderRight: '4px solid #8b675a', borderBottom: '4px solid #8b675a' }}
-                >
-                  Connect Wallet
-                </button>
-              ) : (
-                <div className="space-y-2">
-                  <div className="px-4 py-2 bg-[#BA867B] text-white font-bold uppercase" style={{ borderRight: '4px solid #8b675a', borderBottom: '4px solid #8b675a' }}>
-                    Connected ✓
-                  </div>
-                  <button className="w-full px-4 py-2 border-2 border-gray-600 font-bold uppercase hover:bg-gray-300 transition-colors text-sm">
-                    Disconnect
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
         </aside>
 
         {/* Main Content */}
@@ -375,10 +337,10 @@ export default function Home() {
             </div>
           )}
 
-          {/* Hypergraph Explorer Tabs */}
-          {(activeTab === 'overview' || activeTab === 'wallets' || activeTab === 'snapshots' || activeTab === 'transactions' || activeTab === 'nodes') && (
+          {/* Hypergraph Explorer */}
+          {(activeTab === 'hypergraph' || activeTab === 'overview' || activeTab === 'wallets' || activeTab === 'snapshots' || activeTab === 'transactions' || activeTab === 'nodes') && (
             <div>
-              <NetworkExplorer initialTab={activeTab as 'overview' | 'wallets' | 'snapshots' | 'transactions' | 'nodes'} />
+              <NetworkExplorer initialTab={activeTab === 'hypergraph' ? 'overview' : (activeTab as 'overview' | 'wallets' | 'snapshots' | 'transactions' | 'nodes')} />
             </div>
           )}
 
