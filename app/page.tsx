@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import NetworkExplorer from '@/components/NetworkExplorer';
+import MetagraphExplorer from '@/components/MetagraphExplorer';
 
 export default function Home() {
   const [showDashboard, setShowDashboard] = useState(false);
@@ -96,6 +98,7 @@ export default function Home() {
         {/* Sidebar */}
         <aside className="w-64 border-r-4 border-[#BA867B] bg-gray-50 min-h-[calc(100vh-73px)] sticky top-[73px]">
           <nav className="p-6 space-y-2">
+            <p className="text-xs text-gray-500 mb-4 uppercase font-bold">PrivacyLedger</p>
             {[
               { id: 'consent', label: 'Consent Management', icon: '📝' },
               { id: 'rights', label: 'Data Subject Rights', icon: '⚖️' },
@@ -115,6 +118,45 @@ export default function Home() {
                 <span className="text-left tracking-wide">{tab.label}</span>
               </button>
             ))}
+            <div className="pt-6 border-t-4 border-gray-400 mt-6">
+              <p className="text-xs text-gray-500 mb-4 uppercase font-bold">Hypergraph Explorer</p>
+              {[
+                { id: 'overview', label: 'Overview', icon: '📊' },
+                { id: 'wallets', label: 'Wallets', icon: '👛' },
+                { id: 'snapshots', label: 'Snapshots', icon: '📸' },
+                { id: 'transactions', label: 'Transactions', icon: '💸' },
+                { id: 'nodes', label: 'Node Explorer', icon: '🖥️' },
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`w-full flex items-center space-x-3 px-4 py-3 font-bold uppercase transition-colors ${
+                    activeTab === tab.id
+                      ? 'bg-[#BA867B] text-white'
+                      : 'text-gray-700 hover:bg-[#BA867B] hover:text-white'
+                  }`}
+                  style={{ borderRight: activeTab === tab.id ? '4px solid #8b675a' : 'none', borderBottom: activeTab === tab.id ? '4px solid #8b675a' : 'none' }}
+                >
+                  <span className="text-2xl">{tab.icon}</span>
+                  <span className="text-left tracking-wide">{tab.label}</span>
+                </button>
+              ))}
+            </div>
+            <div className="pt-6 border-t-4 border-gray-400 mt-6">
+              <p className="text-xs text-gray-500 mb-4 uppercase font-bold">Metagraphs</p>
+              <button
+                onClick={() => setActiveTab('metagraphs')}
+                className={`w-full flex items-center space-x-3 px-4 py-3 font-bold uppercase transition-colors ${
+                  activeTab === 'metagraphs'
+                    ? 'bg-[#BA867B] text-white'
+                    : 'text-gray-700 hover:bg-[#BA867B] hover:text-white'
+                }`}
+                style={{ borderRight: activeTab === 'metagraphs' ? '4px solid #8b675a' : 'none', borderBottom: activeTab === 'metagraphs' ? '4px solid #8b675a' : 'none' }}
+              >
+                <span className="text-2xl">🌐</span>
+                <span className="text-left tracking-wide">Metagraphs</span>
+              </button>
+            </div>
           </nav>
 
           <div className="px-6 pt-8">
@@ -330,6 +372,20 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+            </div>
+          )}
+
+          {/* Hypergraph Explorer Tabs */}
+          {(activeTab === 'overview' || activeTab === 'wallets' || activeTab === 'snapshots' || activeTab === 'transactions' || activeTab === 'nodes') && (
+            <div>
+              <NetworkExplorer initialTab={activeTab as 'overview' | 'wallets' | 'snapshots' | 'transactions' | 'nodes'} />
+            </div>
+          )}
+
+          {/* Metagraphs Tab */}
+          {activeTab === 'metagraphs' && (
+            <div>
+              <MetagraphExplorer />
             </div>
           )}
         </main>

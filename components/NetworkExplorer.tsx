@@ -14,8 +14,12 @@ import {
   type Node,
 } from '@/lib/api/constellation';
 
-export default function NetworkExplorer() {
-  const [activeTab, setActiveTab] = useState<'overview' | 'wallets' | 'snapshots' | 'transactions' | 'nodes'>('overview');
+interface NetworkExplorerProps {
+  initialTab?: 'overview' | 'wallets' | 'snapshots' | 'transactions' | 'nodes';
+}
+
+export default function NetworkExplorer({ initialTab = 'overview' }: NetworkExplorerProps) {
+  const [activeTab, setActiveTab] = useState<'overview' | 'wallets' | 'snapshots' | 'transactions' | 'nodes'>(initialTab);
   const [networkStats, setNetworkStats] = useState<NetworkStats | null>(null);
   const [wallets, setWallets] = useState<Wallet[]>([]);
   const [snapshots, setSnapshots] = useState<Snapshot[]>([]);
