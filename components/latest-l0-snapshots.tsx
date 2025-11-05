@@ -45,7 +45,7 @@ export function LatestL0Snapshots() {
           </thead>
           <tbody>
             {snapshots.map((snapshot) => (
-              <tr key={snapshot.hash} className="border-b-2 border-gray-300 hover:bg-gray-100">
+              <tr key={snapshot.hash} className="border-b-2 border-gray-300 hover:bg-[#FFF8E7]">
                 <td className="px-4 py-3 font-mono text-sm text-[#8B7355] font-bold">{snapshot.blockHeight}</td>
                 <td className="px-4 py-3 text-gray-700">{new Date(snapshot.timestamp).toLocaleString()}</td>
                 <td className="px-4 py-3 text-right text-gray-700">0</td>

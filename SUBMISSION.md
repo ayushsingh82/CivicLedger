@@ -1,4 +1,4 @@
-# 🌌 PrivacyLedger - Hackathon Submission
+# 🌌 CivicLedger - Hackathon Submission
 
 **LegalHack 2025: Constellation x LegalTech Hackathon**  
 **"Code for Trust, Compliance & Decentralization"**
@@ -7,7 +7,7 @@
 
 ## 📋 Project Summary
 
-**PrivacyLedger** is a decentralized GDPR compliance platform built on Constellation Network's Hypergraph. It solves the critical problem of trustworthy consent management and data subject rights enforcement by leveraging immutable blockchain records, zero-trust architecture, and feeless transactions.
+**CivicLedger** is a decentralized GDPR compliance platform built on Constellation Network's Hypergraph. It solves the critical problem of trustworthy consent management and data subject rights enforcement by leveraging immutable blockchain records, zero-trust architecture, and feeless transactions.
 
 ---
 
@@ -131,8 +131,8 @@ Constellation Network wallet (Stargazer Wallet)
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/privacyledger.git
-cd privacyledger
+git clone https://github.com/yourusername/civicledger.git
+cd civicledger
 
 # Install dependencies
 npm install
@@ -274,7 +274,7 @@ Following Constellation's L0 Standard for:
 
 ## 👥 Team
 
-**PrivacyLedger Development Team**  
+**CivicLedger Development Team**  
 Building decentralized trust for a better digital world.
 
 ---

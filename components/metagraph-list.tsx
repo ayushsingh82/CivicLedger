@@ -20,7 +20,7 @@ export function MetagraphList({ metagraphs }: MetagraphListProps) {
           </thead>
           <tbody>
             {metagraphs.map((meta) => (
-              <tr key={meta.metagraphAddress} className="border-b-2 border-gray-300 hover:bg-gray-50">
+              <tr key={meta.metagraphAddress} className="border-b-2 border-gray-300 hover:bg-[#FFF8E7]">
                 <td className="px-6 py-4 font-bold text-black">{meta.name}</td>
                 <td className="px-6 py-4 font-mono text-sm text-[#8B7355]">{meta.metagraphAddress}</td>
                 <td className="px-6 py-4">

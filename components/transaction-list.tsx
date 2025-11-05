@@ -46,7 +46,7 @@ export function TransactionList({ metagraphId, metagraphSymbol }: TransactionLis
       {transactions.map((tx) => (
         <div
           key={tx.hash}
-          className="p-4 bg-gray-50 border-2 border-gray-400 hover:shadow-md transition-shadow"
+          className="p-4 bg-[#FFF8E7] border-2 border-gray-400 hover:shadow-md transition-shadow"
           style={{ borderRight: '4px solid #000', borderBottom: '4px solid #000' }}
         >
           <div className="flex items-center justify-between mb-2">

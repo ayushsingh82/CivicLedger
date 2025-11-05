@@ -1,4 +1,4 @@
-# 🎤 PrivacyLedger Hackathon Presentation Guide
+# 🎤 CivicLedger Hackathon Presentation Guide
 
 **LegalHack 2025: Constellation x LegalTech**  
 **Presentation Time: 3-5 minutes**  
@@ -20,7 +20,7 @@
 ### Part 2: Our Solution (45 seconds)
 
 **Script:**
-> "PrivacyLedger leverages Constellation Network's Hypergraph to provide immutable, verifiable GDPR consent management. We record all consent events on-chain using HGTP - the Hypergraph Transfer Protocol - giving enterprises regulatory-proof audit trails while making compliance accessible to everyone through feeless transactions."
+> "CivicLedger leverages Constellation Network's Hypergraph to provide immutable, verifiable GDPR consent management. We record all consent events on-chain using HGTP - the Hypergraph Transfer Protocol - giving enterprises regulatory-proof audit trails while making compliance accessible to everyone through feeless transactions."
 
 **Visual:** Show app landing page with key stats
 
@@ -35,7 +35,7 @@
 ### Part 3: Constellation Integration (60 seconds)
 
 **Script:**
-> "Built on Constellation Network, PrivacyLedger uses three key technologies:
+> "Built on Constellation Network, CivicLedger uses three key technologies:
 
 > First, HGTP - the Hypergraph Transfer Protocol - provides DAG-based data validation. Unlike traditional blockchains, this gives us massive scalability without compromise.
 
@@ -82,11 +82,11 @@
 ### Part 5: Impact & Future (30 seconds)
 
 **Script:**
-> "PrivacyLedger solves a real compliance problem for millions of businesses. By making GDPR compliance immutable, automated, and accessible, we're bringing trust and transparency to data privacy.
+> "CivicLedger solves a real compliance problem for millions of businesses. By making GDPR compliance immutable, automated, and accessible, we're bringing trust and transparency to data privacy.
 
 > This is just the beginning. Our metagraph architecture scales to any enterprise. We're planning multi-jurisdiction support for CCPA, LGPD, and more. And we're building toward full smart contract automation for data rights.
 
-> PrivacyLedger - decentralized trust for a better digital world, powered by Constellation Network."
+> CivicLedger - decentralized trust for a better digital world, powered by Constellation Network."
 
 **Visual:** Future roadmap or closing slide
 
@@ -191,7 +191,7 @@
 ## 🎨 Slide Deck Suggestions
 
 ### Slide 1: Title
-- PrivacyLedger logo
+- CivicLedger logo
 - Subtitle: "GDPR Compliance on Constellation Network"
 - Tagline: "Immutable • Verifiable • Feeless"
 
@@ -220,7 +220,7 @@
 - Future roadmap
 
 ### Slide 7: Call to Action
-- "Try PrivacyLedger"
+- "Try CivicLedger"
 - GitHub link
 - Team credits
 
@@ -234,7 +234,7 @@
 4. **Demo**: Show it working
 5. **Differentiation**: Feeless, scalable, zero-trust
 6. **Impact**: Benefits all stakeholders
-7. **Ask**: "Vote for PrivacyLedger!"
+7. **Ask**: "Vote for CivicLedger!"
 
 ---
 

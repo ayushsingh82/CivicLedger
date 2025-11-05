@@ -54,7 +54,7 @@ export default function Home() {
         {/* Header */}
         <header className="absolute top-6 left-6 z-10">
           <div className="bg-[#8B7355] border-2 border-black shadow-[6px_6px_0_0_rgba(0,0,0,1)] px-6 py-3 rounded-lg">
-            <h1 className="text-2xl font-black text-white tracking-wide">PrivacyLedger</h1>
+            <h1 className="text-2xl font-black text-white tracking-wide">CivicLedger</h1>
             <p className="text-xs font-semibold text-[#FFF8E7]">Powered by Constellation Network</p>
           </div>
         </header>
@@ -63,7 +63,7 @@ export default function Home() {
         <div className="relative pt-32 pb-16 px-4 text-center">
           <p className="text-sm font-black mb-4 text-black">Decentralized GDPR Compliance & Blockchain Explorer</p>
           <h3 className="text-6xl font-bold font-black text-[#8B7355] italic mb-4">
-            PrivacyLedger
+            CivicLedger
           </h3>
           <h2 className="text-3xl font-black text-black italic mb-8">GDPR Compliance on the Hypergraph</h2>
           <p className="text-xl text-black mb-12 max-w-3xl mx-auto leading-relaxed">
@@ -157,7 +157,7 @@ export default function Home() {
             <div className="flex items-center space-x-3">
               
               <div>
-                <h1 className="text-xl font-bold text-black tracking-wide">PrivacyLedger</h1>
+                <h1 className="text-xl font-bold text-black tracking-wide">CivicLedger</h1>
                 <p className="text-xs font-medium text-black">Powered by Constellation Network</p>
               </div>
             </div>
@@ -207,7 +207,7 @@ export default function Home() {
             </div>
 
             <div className="pt-6 border-t-4 border-gray-400 mt-6">
-              <p className="text-xs text-gray-500 mb-4 uppercase font-bold">PrivacyLedger</p>
+              <p className="text-xs text-gray-500 mb-4 uppercase font-bold">CivicLedger</p>
               {[
                 { id: 'consent', label: 'Consent Management', icon: '📝' },
                 { id: 'rights', label: 'Data Subject Rights', icon: '⚖️' },
@@ -279,7 +279,7 @@ export default function Home() {
                   {consents.map((consent) => (
                     <div
                       key={consent.id}
-                      className="p-4 bg-gray-50 border-2 border-gray-400 flex items-center justify-between hover:shadow-md transition-shadow"
+                      className="p-4 bg-[#FFF8E7] border-2 border-gray-400 flex items-center justify-between hover:shadow-md transition-shadow"
                       style={{ borderRight: '4px solid #000', borderBottom: '4px solid #000' }}
                     >
                       <div className="flex items-center space-x-4">

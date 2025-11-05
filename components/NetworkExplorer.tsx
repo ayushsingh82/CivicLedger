@@ -212,7 +212,7 @@ export default function NetworkExplorer({ initialTab = 'overview' }: NetworkExpl
                   </thead>
                   <tbody>
                     {wallets.slice(0, 50).map((wallet, idx) => (
-                      <tr key={wallet.address} className="border-b-2 border-gray-300 hover:bg-gray-50">
+                      <tr key={wallet.address} className="border-b-2 border-gray-300 hover:bg-[#FFF8E7]">
                         <td className="px-6 py-4 font-bold text-black">{wallet.rank}</td>
                         <td className="px-6 py-4 font-mono text-sm text-[#8B7355]">{wallet.address}</td>
                         <td className="px-6 py-4 text-right font-bold text-black">{wallet.balance.toFixed(2)} DAG</td>
@@ -311,7 +311,7 @@ export default function NetworkExplorer({ initialTab = 'overview' }: NetworkExpl
                   </thead>
                   <tbody>
                     {nodes.map((node) => (
-                      <tr key={node.address} className="border-b-2 border-gray-300 hover:bg-gray-50">
+                      <tr key={node.address} className="border-b-2 border-gray-300 hover:bg-[#FFF8E7]">
                         <td className="px-6 py-4 font-mono text-sm text-[#8B7355]">{node.address.substring(0, 20)}...</td>
                         <td className="px-6 py-4 font-bold text-black">{node.alias || 'N/A'}</td>
                         <td className="px-6 py-4 text-right font-bold text-black">{node.uptime.toFixed(2)}%</td>

@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PrivacyLedger - GDPR Consent & Data Rights",
+  title: "CivicLedger - GDPR Consent & Data Rights",
   description: "Decentralized GDPR compliance platform powered by Constellation Network",
 };
 

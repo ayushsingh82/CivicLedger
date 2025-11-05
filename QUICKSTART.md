@@ -1,4 +1,4 @@
-# 🚀 PrivacyLedger Quick Start Guide
+# 🚀 CivicLedger Quick Start Guide
 
 ## Prerequisites
 
@@ -26,7 +26,7 @@ The application will be available at: **http://localhost:3000**
 
 ### 1. Initial Load
 - Open http://localhost:3000 in your browser
-- You should see the PrivacyLedger landing page with 3 consent records
+- You should see the CivicLedger landing page with 3 consent records
 
 ### 2. Wallet Connection (Simulated)
 - Click "Connect Wallet" button in the header
@@ -123,7 +123,7 @@ my-app/
 ## Demo Script for Video
 
 ### 0:00 - 0:15: Introduction
-- "PrivacyLedger solves GDPR compliance using Constellation Network"
+- "CivicLedger solves GDPR compliance using Constellation Network"
 - Show landing page and stats
 
 ### 0:15 - 0:45: Connect & Record Consent
