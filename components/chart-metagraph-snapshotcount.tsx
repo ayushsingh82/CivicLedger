@@ -30,7 +30,7 @@ export function ChartMetagraphSnapshotCount({ snapshotMetrics, metagraphAddress 
   const total = filteredMetrics.reduce((sum, m) => sum + m['Snapshot Count'], 0);
 
   return (
-    <div className="p-6 bg-gray-50 border-2 border-[#BA867B]" style={{ borderRight: '6px solid #8b675a', borderBottom: '6px solid #8b675a' }}>
+    <div className="p-6 bg-[#FFF8E7] border-2 border-[#8B7355]" style={{ borderRight: '6px solid black', borderBottom: '6px solid black' }}>
       <h4 className="text-2xl font-bold text-black mb-4 uppercase">Global L0 Snapshot Count</h4>
       <div className="h-64 mb-4">
         <ResponsiveContainer width="100%" height="100%">
@@ -58,7 +58,7 @@ export function ChartMetagraphSnapshotCount({ snapshotMetrics, metagraphAddress 
             <Tooltip
               contentStyle={{
                 backgroundColor: '#f9fafb',
-                border: '2px solid #BA867B',
+                border: '2px solid #8B7355',
                 borderRadius: '4px',
                 color: '#111827',
               }}
@@ -66,9 +66,9 @@ export function ChartMetagraphSnapshotCount({ snapshotMetrics, metagraphAddress 
             />
             <Bar
               dataKey="Snapshot Count"
-              fill="#BA867B"
+              fill="#8B7355"
               radius={[4, 4, 0, 0]}
-              stroke="#8b675a"
+              stroke="black"
               strokeWidth={1}
             />
           </BarChart>
@@ -77,7 +77,7 @@ export function ChartMetagraphSnapshotCount({ snapshotMetrics, metagraphAddress 
       <p className="text-sm text-black italic mb-2 font-bold">
         Total event-triggered global L0 snapshots
       </p>
-      <p className="text-lg font-bold text-[#BA867B]">
+      <p className="text-lg font-bold text-[#8B7355]">
         Total: {total.toLocaleString()} snapshots
       </p>
     </div>

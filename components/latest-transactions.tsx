@@ -50,7 +50,7 @@ export function LatestTransactions({ limit = 10 }: LatestTransactionsProps) {
           style={{ borderRight: '4px solid #000', borderBottom: '4px solid #000' }}
         >
           <div className="flex items-center justify-between mb-2">
-            <p className="font-mono text-sm text-[#BA867B] font-bold">{tx.hash.substring(0, 30)}...</p>
+            <p className="font-mono text-sm text-[#8B7355] font-bold">{tx.hash.substring(0, 30)}...</p>
             <span className={`px-3 py-1 text-xs font-bold uppercase ${
               tx.status === 'confirmed' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
             }`}>

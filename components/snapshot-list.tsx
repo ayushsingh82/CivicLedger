@@ -46,13 +46,13 @@ export function SnapshotList({ metagraphId, metagraphSymbol }: SnapshotListProps
       {snapshots.map((snapshot) => (
         <div
           key={snapshot.hash}
-          className="p-4 bg-gray-50 border-2 border-gray-400 flex items-center justify-between hover:shadow-md transition-shadow"
+          className="p-4 bg-[#FFF8E7] border-2 border-gray-400 flex items-center justify-between hover:shadow-md transition-shadow"
           style={{ borderRight: '4px solid #000', borderBottom: '4px solid #000' }}
         >
           <div className="flex items-center space-x-4">
-            <div className="w-3 h-3 bg-[#BA867B]" />
+                        <div className="w-3 h-3 bg-[#8B7355]" />
             <div>
-              <p className="font-mono text-sm text-[#BA867B] font-bold">{snapshot.hash.substring(0, 30)}...</p>
+                      <p className="font-mono text-sm text-[#8B7355] font-bold">{snapshot.hash.substring(0, 30)}...</p>
               <p className="text-sm text-gray-600">{new Date(snapshot.timestamp).toLocaleString()}</p>
             </div>
           </div>

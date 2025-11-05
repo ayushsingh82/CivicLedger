@@ -27,7 +27,7 @@ export function ChartTransactionVolume({ metrics }: ChartTransactionVolumeProps)
   const total = chartData.reduce((sum, m) => sum + m['Volume (DAG)'], 0);
 
   return (
-    <div className="p-6 bg-gray-50 border-2 border-[#BA867B]" style={{ borderRight: '6px solid #8b675a', borderBottom: '6px solid #8b675a' }}>
+    <div className="p-6 bg-[#FFF8E7] border-2 border-[#8B7355]" style={{ borderRight: '6px solid black', borderBottom: '6px solid black' }}>
       <h4 className="text-2xl font-bold text-black mb-4 uppercase">DAG Transaction Volume</h4>
       <div className="h-64 mb-4">
         <ResponsiveContainer width="100%" height="100%">
@@ -47,13 +47,13 @@ export function ChartTransactionVolume({ metrics }: ChartTransactionVolumeProps)
             <Tooltip
               contentStyle={{
                 backgroundColor: '#f9fafb',
-                border: '2px solid #BA867B',
+                border: '2px solid #8B7355',
                 borderRadius: '4px',
                 color: '#111827',
               }}
               formatter={(value: number) => [`${value.toLocaleString()} DAG`, 'Volume']}
             />
-            <Bar dataKey="Volume (DAG)" fill="#BA867B" radius={[4, 4, 0, 0]} stroke="#8b675a" strokeWidth={1} />
+            <Bar dataKey="Volume (DAG)" fill="#8B7355" radius={[4, 4, 0, 0]} stroke="black" strokeWidth={1} />
           </BarChart>
         </ResponsiveContainer>
       </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import NetworkExplorer from '@/components/NetworkExplorer';
 import MetagraphExplorer from '@/components/MetagraphExplorer';
 
@@ -30,59 +31,127 @@ export default function Home() {
 
   // Landing Page
   if (!showDashboard) {
+    const backgroundCircles = [
+      { className: 'fixed left-[-40px] top-[-40px] w-40 h-40', color: 'bg-[#8B7355]/70', blur: 'blur-sm', delay: 0 },
+      { className: 'fixed left-[-32px] bottom-[-32px] w-32 h-32', color: 'bg-[#D4A574]/70', blur: 'blur', delay: 0.2 },
+      { className: 'fixed right-[-40px] top-[-40px] w-40 h-40', color: 'bg-[#8B7355]/70', blur: 'blur-sm', delay: 0.4 },
+      { className: 'fixed right-[-32px] bottom-[-32px] w-32 h-32', color: 'bg-[#D4A574]/70', blur: 'blur', delay: 0.6 },
+    ];
+
     return (
-      <div className="min-h-screen bg-white" style={{ fontFamily: "'Courier New', monospace" }}>
+      <div className="min-h-screen bg-[#FFFBF0] font-sans tracking-tight relative overflow-x-hidden">
+        {/* Animated brown/cream background circles */}
+        {backgroundCircles.map((circle, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: [0.9, 1.05, 0.9] }}
+            transition={{ duration: 10, repeat: Infinity, delay: circle.delay, ease: 'easeInOut' }}
+            className={`${circle.className} ${circle.color} ${circle.blur} rounded-full border-2 border-[#D4A574]/30 pointer-events-none z-0`}
+          />
+        ))}
+
         {/* Header */}
-        <header className="absolute top-0 left-0 p-6 z-10">
-          <div className="bg-[#BA867B] px-6 py-4" style={{ borderRight: '8px solid #8b675a', borderBottom: '8px solid #8b675a' }}>
-            <h1 className="text-2xl font-bold text-white tracking-wide">PrivacyLedger</h1>
-            <p className="text-sm font-semibold text-black">Powered by Constellation Network</p>
+        <header className="absolute top-6 left-6 z-10">
+          <div className="bg-[#8B7355] border-2 border-black shadow-[6px_6px_0_0_rgba(0,0,0,1)] px-6 py-3 rounded-lg">
+            <h1 className="text-2xl font-black text-white tracking-wide">PrivacyLedger</h1>
+            <p className="text-xs font-semibold text-[#FFF8E7]">Powered by Constellation Network</p>
           </div>
         </header>
 
         {/* Hero Section */}
-        <section className="flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-5xl">
-            <h2 className="text-7xl font-bold text-black mb-12 tracking-tight leading-tight">
-              PrivacyLedger: GDPR &{' '}
-              <span className="text-[#BA867B]">Hypergraph Explorer</span>
-            </h2>
-            <p className="text-2xl text-gray-700 mb-8 leading-tight px-4">
-              Immutable consent records, automated data subject rights, and comprehensive blockchain explorer
-              powered by Constellation Network's feeless architecture
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto">
-              <div className="p-4 border-2 border-[#BA867B] bg-gray-50" style={{ borderRight: '4px solid #8b675a', borderBottom: '4px solid #8b675a' }}>
-                <h3 className="text-xl font-bold text-black mb-2 uppercase">GDPR Compliance</h3>
-                <p className="text-gray-700 text-sm">Consent management & data subject rights</p>
-              </div>
-              <div className="p-4 border-2 border-[#BA867B] bg-gray-50" style={{ borderRight: '4px solid #8b675a', borderBottom: '4px solid #8b675a' }}>
-                <h3 className="text-xl font-bold text-black mb-2 uppercase">Hypergraph Explorer</h3>
-                <p className="text-gray-700 text-sm">Network stats, wallets, transactions & nodes</p>
-              </div>
-              <div className="p-4 border-2 border-[#BA867B] bg-gray-50" style={{ borderRight: '4px solid #8b675a', borderBottom: '4px solid #8b675a' }}>
-                <h3 className="text-xl font-bold text-black mb-2 uppercase">Metagraphs</h3>
-                <p className="text-gray-700 text-sm">DOR & PACA statistics with charts</p>
+        <div className="relative pt-32 pb-16 px-4 text-center">
+          <p className="text-sm font-black mb-4 text-black">Decentralized GDPR Compliance & Blockchain Explorer</p>
+          <h3 className="text-6xl font-bold font-black text-[#8B7355] italic mb-4">
+            PrivacyLedger
+          </h3>
+          <h2 className="text-3xl font-black text-black italic mb-8">GDPR Compliance on the Hypergraph</h2>
+          <p className="text-xl text-black mb-12 max-w-3xl mx-auto leading-relaxed">
+            Immutable consent records, automated data subject rights, and comprehensive blockchain explorer
+            powered by Constellation Network's feeless architecture
+          </p>
+          <button
+            onClick={() => setShowDashboard(true)}
+            className="bg-[#8B7355] border-2 border-black shadow-[6px_6px_0_0_rgba(0,0,0,1)] px-12 py-4 rounded-lg text-xl font-bold text-white hover:bg-[#8B7355]/90 hover:shadow-[4px_4px_0_0_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 active:shadow-[2px_2px_0_0_rgba(0,0,0,1)] active:translate-x-[4px] active:translate-y-[4px]"
+          >
+            Get Started
+          </button>
+        </div>
+
+        {/* Main Content - Bento Grid */}
+        <div className="max-w-5xl mx-auto px-4 pb-20 mt-16">
+          <div className="grid grid-cols-12 gap-6 auto-rows-[180px]">
+            {/* Core Features */}
+            <div className="col-span-12 md:col-span-6 row-span-2 bg-[#FFF8E7] border-2 border-black shadow-[8px_8px_0_0_rgba(0,0,0,1)] p-8 rounded-2xl flex flex-col justify-center">
+              <h2 className="text-xl font-black mb-4 text-white bg-[#8B7355] px-3 py-2 rounded-lg inline-block">✨ Core Features</h2>
+              <p className="text-sm text-black leading-relaxed mb-3">✅ <strong>GDPR Compliance</strong> – Immutable consent records with blockchain verification</p>
+              <p className="text-sm text-black leading-relaxed mb-3">✅ <strong>Data Subject Rights</strong> – Automated access, portability, and erasure requests</p>
+              <p className="text-sm text-black leading-relaxed">✅ <strong>Blockchain Explorer</strong> – Hypergraph and Metagraph statistics with interactive charts</p>
+            </div>
+
+            {/* Constellation Integration */}
+            <div className="col-span-12 md:col-span-6 row-span-2 bg-[#8B7355] border-2 border-black shadow-[8px_8px_0_0_rgba(0,0,0,1)] p-8 rounded-2xl flex flex-col justify-center">
+              <h2 className="text-xl font-black mb-4 text-white bg-black px-3 py-2 rounded-lg inline-block">🌌 Constellation Tech</h2>
+              <p className="text-sm text-white mb-4 leading-relaxed">Built on Constellation Network infrastructure:</p>
+              <ul className="space-y-2 text-sm">
+                <li className="flex items-center"><span className="w-2 h-2 rounded-full mr-3 bg-[#FFF8E7]"></span><span className="text-white font-semibold">HGTP Protocol</span></li>
+                <li className="flex items-center"><span className="w-2 h-2 rounded-full mr-3 bg-[#FFF8E7]"></span><span className="text-white font-semibold">Metagraphs</span></li>
+                <li className="flex items-center"><span className="w-2 h-2 rounded-full mr-3 bg-[#FFF8E7]"></span><span className="text-white font-semibold">L0 Standard</span></li>
+                <li className="flex items-center"><span className="w-2 h-2 rounded-full mr-3 bg-[#FFF8E7]"></span><span className="text-white font-semibold">Feeless Transactions</span></li>
+              </ul>
+            </div>
+
+            {/* How It Works */}
+            <div className="col-span-12 md:col-span-8 row-span-2 bg-[#FFF8E7] border-2 border-black shadow-[8px_8px_0_0_rgba(0,0,0,1)] p-8 rounded-2xl flex flex-col justify-center">
+              <h2 className="text-xl font-black mb-4 text-white bg-[#8B7355] px-3 py-2 rounded-lg inline-block">🚀 How It Works</h2>
+              <p className="text-sm text-black mb-4 leading-relaxed">Decentralized GDPR compliance in three steps:</p>
+              <div className="space-y-3">
+                <div className="flex items-start">
+                  <span className="text-lg font-extrabold text-[#8B7355] mr-3">1</span>
+                  <div>
+                    <div className="font-bold text-black mb-1 text-sm">Record Consent</div>
+                    <div className="text-xs text-black">Users grant or revoke consent for data processing, recorded immutably on Hypergraph</div>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <span className="text-lg font-extrabold text-[#8B7355] mr-3">2</span>
+                  <div>
+                    <div className="font-bold text-black mb-1 text-sm">Exercise Rights</div>
+                    <div className="text-xs text-black">Users submit GDPR rights requests (Access, Portability, Erasure) automatically processed</div>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <span className="text-lg font-extrabold text-[#8B7355] mr-3">3</span>
+                  <div>
+                    <div className="font-bold text-black mb-1 text-sm">Explore Network</div>
+                    <div className="text-xs text-black">View network statistics, transactions, wallets, and metagraph data with interactive charts</div>
+                  </div>
+                </div>
               </div>
             </div>
-            <button
-              onClick={() => setShowDashboard(true)}
-              className="px-4 py-2 bg-[#BA867B] text-white text-3xl font-bold uppercase hover:opacity-90 transition-all duration-200"
-              style={{ borderRight: '8px solid #8b675a', borderBottom: '8px solid #8b675a' }}
-            >
-              Get Started
-            </button>
+
+            {/* Key Properties */}
+            <div className="col-span-12 md:col-span-4 row-span-1 bg-[#FFF8E7] border-2 border-black shadow-[8px_8px_0_0_rgba(0,0,0,1)] p-8 rounded-2xl flex flex-col justify-center">
+              <h3 className="text-lg font-black mb-2 text-white bg-[#8B7355] px-3 py-1 rounded-lg inline-block">🔒 Immutable Records</h3>
+              <p className="text-black text-sm mt-2">All consent records are permanently stored on Constellation Hypergraph, providing tamper-proof evidence for regulatory compliance.</p>
+            </div>
+
+            {/* Explorer Features */}
+            <div className="col-span-12 md:col-span-4 row-span-1 bg-[#FFF8E7] border-2 border-black shadow-[8px_8px_0_0_rgba(0,0,0,1)] p-8 rounded-2xl flex flex-col justify-center">
+              <h4 className="text-lg font-bold text-white bg-[#D4A574] px-3 py-1 rounded-lg inline-block">📊 Explorer Features</h4>
+              <p className="text-black text-sm mt-2">Comprehensive Hypergraph and Metagraph explorer with real-time statistics, charts, and transaction data visualization.</p>
+            </div>
           </div>
-        </section>
+        </div>
       </div>
     );
   }
 
   // Dashboard Page with Sidebar
   return (
-    <div className="min-h-screen bg-white" style={{ fontFamily: "'Courier New', monospace" }}>
+    <div className="min-h-screen bg-[#FFFBF0]" style={{ fontFamily: "'Courier New', monospace" }}>
       {/* Header */}
-      <header className="border-b-4 border-[#BA867B] bg-white sticky top-0 z-50">
+      <header className="border-b-4 border-[#8B7355] bg-[#FFFBF0] sticky top-0 z-50">
         <div className="px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-3">
@@ -94,8 +163,8 @@ export default function Home() {
             </div>
             <button
               onClick={() => setShowDashboard(false)}
-              className="px-6 py-2 border-2 border-[#BA867B] text-[#BA867B] font-bold uppercase hover:bg-[#BA867B] hover:text-white transition-colors"
-              style={{ borderRight: '4px solid #8b675a', borderBottom: '4px solid #8b675a' }}
+              className="px-6 py-2 border-2 border-[#8B7355] text-[#8B7355] font-bold uppercase hover:bg-[#8B7355] hover:text-white transition-colors"
+              style={{ borderRight: '4px solid black', borderBottom: '4px solid black' }}
             >
               ← Back to Home
             </button>
@@ -105,17 +174,17 @@ export default function Home() {
 
       <div className="flex">
         {/* Sidebar */}
-        <aside className="w-64 border-r-4 border-[#BA867B] bg-gray-50 min-h-[calc(100vh-73px)] sticky top-[73px]">
+        <aside className="w-64 border-r-4 border-[#8B7355] bg-[#FFF8E7] min-h-[calc(100vh-73px)] sticky top-[73px]">
           <nav className="p-6 space-y-2">
             <p className="text-xs text-gray-500 mb-4 uppercase font-bold">Hypergraph</p>
             <button
               onClick={() => setActiveTab('hypergraph')}
-              className={`w-full flex items-center space-x-3 px-4 py-3 font-bold uppercase transition-colors ${
-                activeTab === 'hypergraph' || activeTab === 'overview' || activeTab === 'wallets' || activeTab === 'snapshots' || activeTab === 'transactions' || activeTab === 'nodes'
-                  ? 'bg-[#BA867B] text-white'
-                  : 'text-gray-700 hover:bg-[#BA867B] hover:text-white'
-              }`}
-              style={{ borderRight: (activeTab === 'hypergraph' || activeTab === 'overview' || activeTab === 'wallets' || activeTab === 'snapshots' || activeTab === 'transactions' || activeTab === 'nodes') ? '4px solid #8b675a' : 'none', borderBottom: (activeTab === 'hypergraph' || activeTab === 'overview' || activeTab === 'wallets' || activeTab === 'snapshots' || activeTab === 'transactions' || activeTab === 'nodes') ? '4px solid #8b675a' : 'none' }}
+                className={`w-full flex items-center space-x-3 px-4 py-3 font-bold uppercase transition-colors ${
+                  activeTab === 'hypergraph' || activeTab === 'overview' || activeTab === 'wallets' || activeTab === 'snapshots' || activeTab === 'transactions' || activeTab === 'nodes'
+                    ? 'bg-[#8B7355] text-white'
+                    : 'text-black hover:bg-[#8B7355] hover:text-white'
+                }`}
+                style={{ borderRight: (activeTab === 'hypergraph' || activeTab === 'overview' || activeTab === 'wallets' || activeTab === 'snapshots' || activeTab === 'transactions' || activeTab === 'nodes') ? '4px solid black' : 'none', borderBottom: (activeTab === 'hypergraph' || activeTab === 'overview' || activeTab === 'wallets' || activeTab === 'snapshots' || activeTab === 'transactions' || activeTab === 'nodes') ? '4px solid black' : 'none' }}
             >
               <span className="text-2xl">🌐</span>
               <span className="text-left tracking-wide">Hypergraph</span>
@@ -127,10 +196,10 @@ export default function Home() {
                 onClick={() => setActiveTab('metagraphs')}
                 className={`w-full flex items-center space-x-3 px-4 py-3 font-bold uppercase transition-colors ${
                   activeTab === 'metagraphs'
-                    ? 'bg-[#BA867B] text-white'
-                    : 'text-gray-700 hover:bg-[#BA867B] hover:text-white'
+                    ? 'bg-[#8B7355] text-white'
+                    : 'text-black hover:bg-[#8B7355] hover:text-white'
                 }`}
-                style={{ borderRight: activeTab === 'metagraphs' ? '4px solid #8b675a' : 'none', borderBottom: activeTab === 'metagraphs' ? '4px solid #8b675a' : 'none' }}
+                style={{ borderRight: activeTab === 'metagraphs' ? '4px solid black' : 'none', borderBottom: activeTab === 'metagraphs' ? '4px solid black' : 'none' }}
               >
                 <span className="text-2xl">🌐</span>
                 <span className="text-left tracking-wide">Metagraphs</span>
@@ -149,10 +218,10 @@ export default function Home() {
                   onClick={() => setActiveTab(tab.id)}
                   className={`w-full flex items-center space-x-3 px-4 py-3 font-bold uppercase transition-colors ${
                     activeTab === tab.id
-                      ? 'bg-[#BA867B] text-white'
-                      : 'text-gray-700 hover:bg-[#BA867B] hover:text-white'
+                      ? 'bg-[#8B7355] text-white'
+                      : 'text-black hover:bg-[#8B7355] hover:text-white'
                   }`}
-                  style={{ borderRight: activeTab === tab.id ? '4px solid #8b675a' : 'none', borderBottom: activeTab === tab.id ? '4px solid #8b675a' : 'none' }}
+                  style={{ borderRight: activeTab === tab.id ? '4px solid black' : 'none', borderBottom: activeTab === tab.id ? '4px solid black' : 'none' }}
                 >
                   <span className="text-2xl">{tab.icon}</span>
                   <span className="text-left tracking-wide">{tab.label}</span>
@@ -176,22 +245,22 @@ export default function Home() {
                     (type) => (
                       <div
                         key={type}
-                        className="p-6 border-2 border-dashed border-[#BA867B] hover:border-solid hover:border-[#BA867B] transition-colors"
-                        style={{ borderRight: '4px solid #8b675a', borderBottom: '4px solid #8b675a' }}
+                        className="p-6 border-2 border-dashed border-[#8B7355] hover:border-solid hover:border-[#8B7355] transition-colors"
+                        style={{ borderRight: '4px solid black', borderBottom: '4px solid black' }}
                       >
                         <h4 className="font-bold text-black mb-4 uppercase tracking-wide">{type}</h4>
                         <div className="flex space-x-2">
                           <button
                             onClick={() => handleConsentAction('grant', type)}
-                            className="flex-1 px-4 py-2 bg-[#BA867B] text-white font-bold uppercase hover:opacity-90 transition-colors"
-                            style={{ borderRight: '4px solid #8b675a', borderBottom: '4px solid #8b675a' }}
+                            className="flex-1 px-4 py-2 bg-[#8B7355] text-white font-bold uppercase hover:opacity-90 transition-colors"
+                            style={{ borderRight: '4px solid black', borderBottom: '4px solid black' }}
                           >
                             Grant
                           </button>
                           <button
                             onClick={() => handleConsentAction('revoke', type)}
-                            className="flex-1 px-4 py-2 border-2 border-[#BA867B] text-[#BA867B] font-bold uppercase hover:bg-[#BA867B] hover:text-white transition-colors"
-                            style={{ borderRight: '4px solid #8b675a', borderBottom: '4px solid #8b675a' }}
+                            className="flex-1 px-4 py-2 border-2 border-[#8B7355] text-[#8B7355] font-bold uppercase hover:bg-[#8B7355] hover:text-white transition-colors"
+                            style={{ borderRight: '4px solid black', borderBottom: '4px solid black' }}
                           >
                             Revoke
                           </button>
@@ -214,7 +283,7 @@ export default function Home() {
                       style={{ borderRight: '4px solid #000', borderBottom: '4px solid #000' }}
                     >
                       <div className="flex items-center space-x-4">
-                        <div className="w-3 h-3 bg-[#BA867B]" />
+                        <div className="w-3 h-3 bg-[#8B7355]" />
                         <div>
                           <p className="font-bold text-black uppercase tracking-wide">{consent.type}</p>
                           <p className="text-sm text-gray-600">
@@ -266,8 +335,8 @@ export default function Home() {
                 ].map((right) => (
                   <div
                     key={right.title}
-                    className="p-8 border-2 border-[#BA867B] hover:bg-[#f9f7f4] transition-shadow"
-                    style={{ borderRight: '6px solid #8b675a', borderBottom: '6px solid #8b675a' }}
+                    className="p-8 border-2 border-[#8B7355] hover:bg-[#FFF8E7] transition-shadow"
+                    style={{ borderRight: '6px solid black', borderBottom: '6px solid black' }}
                   >
                     <div className="flex items-start justify-between">
                       <div className="flex items-start space-x-4">
@@ -279,8 +348,8 @@ export default function Home() {
                       </div>
                       <button
                         onClick={() => handleDataRequest(right.title)}
-                        className="px-8 py-3 bg-[#BA867B] text-white font-bold uppercase hover:opacity-90 transition-colors whitespace-nowrap text-lg"
-                        style={{ borderRight: '4px solid #8b675a', borderBottom: '4px solid #8b675a' }}
+                        className="px-8 py-3 bg-[#8B7355] text-white font-bold uppercase hover:opacity-90 transition-colors whitespace-nowrap text-lg"
+                        style={{ borderRight: '4px solid black', borderBottom: '4px solid black' }}
                       >
                         {right.action}
                       </button>
@@ -298,30 +367,30 @@ export default function Home() {
                 Compliance Metrics
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div className="p-8 bg-gray-50 border-2 border-[#BA867B]" style={{ borderRight: '6px solid #8b675a', borderBottom: '6px solid #8b675a' }}>
+                <div className="p-8 bg-[#FFF8E7] border-2 border-[#8B7355]" style={{ borderRight: '6px solid black', borderBottom: '6px solid black' }}>
                   <div className="flex items-center justify-between mb-4">
                     <h4 className="font-bold text-2xl text-black uppercase tracking-wide">Compliance Score</h4>
                     <span className="text-4xl">✅</span>
                   </div>
-                  <div className="text-5xl font-bold text-[#BA867B] mb-2">98%</div>
+                  <div className="text-5xl font-bold text-[#8B7355] mb-2">98%</div>
                   <p className="text-gray-700 uppercase font-bold tracking-wide">
                     All consent records verified on-chain
                   </p>
                 </div>
 
-                <div className="p-8 bg-gray-50 border-2 border-[#BA867B]" style={{ borderRight: '6px solid #8b675a', borderBottom: '6px solid #8b675a' }}>
+                <div className="p-8 bg-[#FFF8E7] border-2 border-[#8B7355]" style={{ borderRight: '6px solid black', borderBottom: '6px solid black' }}>
                   <div className="flex items-center justify-between mb-4">
                     <h4 className="font-bold text-2xl text-black uppercase tracking-wide">Active Data Requests</h4>
                     <span className="text-4xl">📋</span>
                   </div>
-                  <div className="text-5xl font-bold text-[#BA867B] mb-2">2</div>
+                  <div className="text-5xl font-bold text-[#8B7355] mb-2">2</div>
                   <p className="text-gray-700 uppercase font-bold tracking-wide">
                     In progress (30-day SLA)
                   </p>
                 </div>
               </div>
 
-              <div className="bg-gray-50 p-8 border-2 border-[#BA867B]" style={{ borderRight: '6px solid #8b675a', borderBottom: '6px solid #8b675a' }}>
+              <div className="bg-[#FFF8E7] p-8 border-2 border-[#8B7355]" style={{ borderRight: '6px solid black', borderBottom: '6px solid black' }}>
                 <h4 className="font-bold text-2xl text-black mb-6 uppercase tracking-wide">Blockchain Verification</h4>
                 <div className="space-y-4">
                   <div className="flex items-center justify-between py-3 border-b-2 border-gray-400">
@@ -344,7 +413,7 @@ export default function Home() {
                   </div>
                   <div className="flex items-center justify-between py-3">
                     <span className="text-gray-700 font-bold uppercase">Blockchain Hash</span>
-                    <span className="font-mono text-[#BA867B] font-bold">
+                    <span className="font-mono text-[#8B7355] font-bold">
                       0x7f8a9b...2c3d4e
                     </span>
                   </div>

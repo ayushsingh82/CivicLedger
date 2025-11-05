@@ -113,19 +113,19 @@ export default function NetworkExplorer({ initialTab = 'overview' }: NetworkExpl
   return (
     <div className="space-y-6">
       {/* Tab Navigation */}
-      <div className="flex space-x-2 border-b-4 border-[#BA867B]">
+      <div className="flex space-x-2 border-b-4 border-[#8B7355]">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id as any)}
             className={`px-6 py-3 font-bold uppercase transition-colors ${
               activeTab === tab.id
-                ? 'bg-[#BA867B] text-white'
+                ? 'bg-[#8B7355] text-white'
                 : 'text-gray-700 hover:bg-gray-100'
             }`}
             style={{
-              borderRight: activeTab === tab.id ? '4px solid #8b675a' : 'none',
-              borderBottom: activeTab === tab.id ? '4px solid #8b675a' : 'none',
+              borderRight: activeTab === tab.id ? '4px solid black' : 'none',
+              borderBottom: activeTab === tab.id ? '4px solid black' : 'none',
             }}
           >
             <span className="text-xl mr-2">{tab.icon}</span>
@@ -147,30 +147,30 @@ export default function NetworkExplorer({ initialTab = 'overview' }: NetworkExpl
               {/* Network Stats Cards */}
               {networkStats && (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-              <div className="p-6 bg-gray-50 border-2 border-[#BA867B]" style={{ borderRight: '6px solid #8b675a', borderBottom: '6px solid #8b675a' }}>
+              <div className="p-6 bg-[#FFF8E7] border-2 border-[#8B7355]" style={{ borderRight: '6px solid black', borderBottom: '6px solid black' }}>
                 <h4 className="font-bold text-xl text-black mb-2 uppercase">Total Transactions</h4>
-                <p className="text-4xl font-bold text-[#BA867B]">{networkStats.totalTransactions.toLocaleString()}</p>
+                <p className="text-4xl font-bold text-[#8B7355]">{networkStats.totalTransactions.toLocaleString()}</p>
               </div>
-              <div className="p-6 bg-gray-50 border-2 border-[#BA867B]" style={{ borderRight: '6px solid #8b675a', borderBottom: '6px solid #8b675a' }}>
+              <div className="p-6 bg-[#FFF8E7] border-2 border-[#8B7355]" style={{ borderRight: '6px solid black', borderBottom: '6px solid black' }}>
                 <h4 className="font-bold text-xl text-black mb-2 uppercase">Total Wallets</h4>
-                <p className="text-4xl font-bold text-[#BA867B]">{networkStats.totalWallets.toLocaleString()}</p>
+                <p className="text-4xl font-bold text-[#8B7355]">{networkStats.totalWallets.toLocaleString()}</p>
               </div>
-              <div className="p-6 bg-gray-50 border-2 border-[#BA867B]" style={{ borderRight: '6px solid #8b675a', borderBottom: '6px solid #8b675a' }}>
+              <div className="p-6 bg-[#FFF8E7] border-2 border-[#8B7355]" style={{ borderRight: '6px solid black', borderBottom: '6px solid black' }}>
                 <h4 className="font-bold text-xl text-black mb-2 uppercase">Total Snapshots</h4>
-                <p className="text-4xl font-bold text-[#BA867B]">{networkStats.totalSnapshots.toLocaleString()}</p>
+                <p className="text-4xl font-bold text-[#8B7355]">{networkStats.totalSnapshots.toLocaleString()}</p>
               </div>
-              <div className="p-6 bg-gray-50 border-2 border-[#BA867B]" style={{ borderRight: '6px solid #8b675a', borderBottom: '6px solid #8b675a' }}>
+              <div className="p-6 bg-[#FFF8E7] border-2 border-[#8B7355]" style={{ borderRight: '6px solid black', borderBottom: '6px solid black' }}>
                 <h4 className="font-bold text-xl text-black mb-2 uppercase">Active Nodes</h4>
-                <p className="text-4xl font-bold text-[#BA867B]">{networkStats.activeNodes}</p>
+                <p className="text-4xl font-bold text-[#8B7355]">{networkStats.activeNodes}</p>
               </div>
-              <div className="p-6 bg-gray-50 border-2 border-[#BA867B]" style={{ borderRight: '6px solid #8b675a', borderBottom: '6px solid #8b675a' }}>
+              <div className="p-6 bg-[#FFF8E7] border-2 border-[#8B7355]" style={{ borderRight: '6px solid black', borderBottom: '6px solid black' }}>
                 <h4 className="font-bold text-xl text-black mb-2 uppercase">DAG Supply</h4>
-                <p className="text-4xl font-bold text-[#BA867B]">{(networkStats.dagSupply / 1000000).toFixed(2)}M</p>
+                  <p className="text-4xl font-bold text-[#8B7355]">{(networkStats.dagSupply / 1000000).toFixed(2)}M</p>
               </div>
               {networkStats.networkHashRate && (
-                <div className="p-6 bg-gray-50 border-2 border-[#BA867B]" style={{ borderRight: '6px solid #8b675a', borderBottom: '6px solid #8b675a' }}>
+                <div className="p-6 bg-[#FFF8E7] border-2 border-[#8B7355]" style={{ borderRight: '6px solid black', borderBottom: '6px solid black' }}>
                   <h4 className="font-bold text-xl text-black mb-2 uppercase">Hash Rate</h4>
-                  <p className="text-4xl font-bold text-[#BA867B]">{networkStats.networkHashRate}</p>
+                  <p className="text-4xl font-bold text-[#8B7355]">{networkStats.networkHashRate}</p>
                 </div>
               )}
                 </div>
@@ -199,10 +199,10 @@ export default function NetworkExplorer({ initialTab = 'overview' }: NetworkExpl
 
           {/* Wallets Tab */}
           {activeTab === 'wallets' && (
-            <div className="border-2 border-[#BA867B]" style={{ borderRight: '6px solid #8b675a', borderBottom: '6px solid #8b675a' }}>
+            <div className="border-2 border-[#8B7355]" style={{ borderRight: '6px solid black', borderBottom: '6px solid black' }}>
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-[#BA867B] text-white">
+                  <thead className="bg-[#8B7355] text-white">
                     <tr>
                       <th className="px-6 py-4 text-left font-bold uppercase">Rank</th>
                       <th className="px-6 py-4 text-left font-bold uppercase">Address</th>
@@ -214,7 +214,7 @@ export default function NetworkExplorer({ initialTab = 'overview' }: NetworkExpl
                     {wallets.slice(0, 50).map((wallet, idx) => (
                       <tr key={wallet.address} className="border-b-2 border-gray-300 hover:bg-gray-50">
                         <td className="px-6 py-4 font-bold text-black">{wallet.rank}</td>
-                        <td className="px-6 py-4 font-mono text-sm text-[#BA867B]">{wallet.address}</td>
+                        <td className="px-6 py-4 font-mono text-sm text-[#8B7355]">{wallet.address}</td>
                         <td className="px-6 py-4 text-right font-bold text-black">{wallet.balance.toFixed(2)} DAG</td>
                         <td className="px-6 py-4 text-right text-gray-700">{wallet.transactionCount.toLocaleString()}</td>
                       </tr>
@@ -231,13 +231,13 @@ export default function NetworkExplorer({ initialTab = 'overview' }: NetworkExpl
               {snapshots.map((snapshot) => (
                 <div
                   key={snapshot.hash}
-                  className="p-4 bg-gray-50 border-2 border-gray-400 flex items-center justify-between hover:shadow-md transition-shadow"
+                  className="p-4 bg-[#FFF8E7] border-2 border-gray-400 flex items-center justify-between hover:shadow-md transition-shadow"
                   style={{ borderRight: '4px solid #000', borderBottom: '4px solid #000' }}
                 >
                   <div className="flex items-center space-x-4">
-                    <div className="w-3 h-3 bg-[#BA867B]" />
+                        <div className="w-3 h-3 bg-[#8B7355]" />
                     <div>
-                      <p className="font-mono text-sm text-[#BA867B] font-bold">{snapshot.hash.substring(0, 20)}...</p>
+                      <p className="font-mono text-sm text-[#8B7355] font-bold">{snapshot.hash.substring(0, 20)}...</p>
                       <p className="text-sm text-gray-600">{new Date(snapshot.timestamp).toLocaleString()}</p>
                     </div>
                   </div>
@@ -263,7 +263,7 @@ export default function NetworkExplorer({ initialTab = 'overview' }: NetworkExpl
                   style={{ borderRight: '4px solid #000', borderBottom: '4px solid #000' }}
                 >
                   <div className="flex items-center justify-between mb-2">
-                    <p className="font-mono text-sm text-[#BA867B] font-bold">{tx.hash.substring(0, 30)}...</p>
+                    <p className="font-mono text-sm text-[#8B7355] font-bold">{tx.hash.substring(0, 30)}...</p>
                     <span className={`px-3 py-1 text-xs font-bold uppercase ${
                       tx.status === 'confirmed' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
                     }`}>
@@ -296,10 +296,10 @@ export default function NetworkExplorer({ initialTab = 'overview' }: NetworkExpl
 
           {/* Nodes Tab */}
           {activeTab === 'nodes' && (
-            <div className="border-2 border-[#BA867B]" style={{ borderRight: '6px solid #8b675a', borderBottom: '6px solid #8b675a' }}>
+            <div className="border-2 border-[#8B7355]" style={{ borderRight: '6px solid black', borderBottom: '6px solid black' }}>
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-[#BA867B] text-white">
+                  <thead className="bg-[#8B7355] text-white">
                     <tr>
                       <th className="px-6 py-4 text-left font-bold uppercase">Address</th>
                       <th className="px-6 py-4 text-left font-bold uppercase">Alias</th>
@@ -312,7 +312,7 @@ export default function NetworkExplorer({ initialTab = 'overview' }: NetworkExpl
                   <tbody>
                     {nodes.map((node) => (
                       <tr key={node.address} className="border-b-2 border-gray-300 hover:bg-gray-50">
-                        <td className="px-6 py-4 font-mono text-sm text-[#BA867B]">{node.address.substring(0, 20)}...</td>
+                        <td className="px-6 py-4 font-mono text-sm text-[#8B7355]">{node.address.substring(0, 20)}...</td>
                         <td className="px-6 py-4 font-bold text-black">{node.alias || 'N/A'}</td>
                         <td className="px-6 py-4 text-right font-bold text-black">{node.uptime.toFixed(2)}%</td>
                         <td className="px-6 py-4 text-right text-gray-700">{node.stake.toFixed(2)} DAG</td>
