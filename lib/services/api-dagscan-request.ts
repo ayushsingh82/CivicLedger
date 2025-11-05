@@ -45,6 +45,18 @@ export interface Transaction {
   metagraphId?: string;
 }
 
+export interface L0SnapshotMetric {
+  date: string;
+  snapshotCount: number;
+  fees: number;
+}
+
+export interface TransactionMetric {
+  date: string;
+  transactionCount: number;
+  transactionVolume: number;
+}
+
 /**
  * Fetch all metagraphs
  */
@@ -170,4 +182,108 @@ export async function getTransactions(metagraphId: string, limit: number = 50): 
     }));
   }
 }
+
+/**
+ * Fetch L0 snapshot metrics (global)
+ */
+export async function getL0SnapshotMetrics(): Promise<L0SnapshotMetric[]> {
+  try {
+    const response = await fetch(`${HYPERGRAPH_API_BASE}/v1/snapshot-metrics`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch L0 snapshot metrics');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching L0 snapshot metrics:', error);
+    // Fallback demo data
+    const metrics: L0SnapshotMetric[] = [];
+    const now = Date.now();
+    for (let i = 13; i >= 0; i--) {
+      const date = new Date(now - i * 24 * 60 * 60 * 1000);
+      metrics.push({
+        date: date.toISOString().split('T')[0],
+        snapshotCount: Math.floor(2000 + Math.random() * 6000),
+        fees: Math.random() * 320 + 10,
+      });
+    }
+    return metrics;
+  }
+}
+
+/**
+ * Fetch transaction metrics (count and volume)
+ */
+export async function getTransactionMetrics(): Promise<TransactionMetric[]> {
+  try {
+    const response = await fetch(`${HYPERGRAPH_API_BASE}/v1/transaction-metrics`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch transaction metrics');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching transaction metrics:', error);
+    // Fallback demo data
+    const metrics: TransactionMetric[] = [];
+    const now = Date.now();
+    for (let i = 13; i >= 0; i--) {
+      const date = new Date(now - i * 24 * 60 * 60 * 1000);
+      metrics.push({
+        date: date.toISOString().split('T')[0],
+        transactionCount: Math.floor(600 + Math.random() * 1800),
+        transactionVolume: Math.random() * 28500000 + 9500000,
+      });
+    }
+    return metrics;
+  }
+}
+
+/**
+ * Fetch latest L0 snapshots (global)
+ */
+export async function getL0Snapshots(limit: number = 10): Promise<Snapshot[]> {
+  try {
+    const response = await fetch(`${HYPERGRAPH_API_BASE}/v1/snapshots?limit=${limit}`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch L0 snapshots');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching L0 snapshots:', error);
+    // Fallback demo data
+    return Array.from({ length: 10 }, (_, i) => ({
+      hash: `0x${Math.random().toString(16).substring(2, 66)}`,
+      timestamp: new Date(Date.now() - i * 60000).toISOString(),
+      blockHeight: 5313650 - i,
+      fee: 0,
+      source: 'L0',
+      destination: 'L0',
+    }));
+  }
+}
+
+/**
+ * Fetch latest DAG transactions
+ */
+export async function getDAGTransactions(limit: number = 10): Promise<Transaction[]> {
+  try {
+    const response = await fetch(`${HYPERGRAPH_API_BASE}/v1/transactions?limit=${limit}`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch DAG transactions');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching DAG transactions:', error);
+    // Fallback demo data
+    return Array.from({ length: 10 }, (_, i) => ({
+      hash: `${Math.random().toString(16).substring(2, 8)}...${Math.random().toString(16).substring(2, 8)}`,
+      from: `DAG${Math.random().toString(36).substring(2, 15)}`,
+      to: `DAG${Math.random().toString(36).substring(2, 15)}`,
+      amount: Math.random() * 4000 + 100,
+      fee: Math.random() * 0.1,
+      timestamp: new Date(Date.now() - i * 30000).toISOString(),
+      status: 'confirmed' as const,
+    }));
+  }
+}
+
 

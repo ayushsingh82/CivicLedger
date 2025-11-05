@@ -69,3 +69,4 @@ export function SnapshotList({ metagraphId, metagraphSymbol }: SnapshotListProps
   );
 }
 
+

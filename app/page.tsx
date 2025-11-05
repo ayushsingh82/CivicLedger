@@ -44,13 +44,27 @@ export default function Home() {
         <section className="flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-5xl">
             <h2 className="text-7xl font-bold text-black mb-12 tracking-tight leading-tight">
-              GDPR Compliance on the{' '}
-              <span className="text-[#BA867B]">Hypergraph</span>
+              PrivacyLedger: GDPR &{' '}
+              <span className="text-[#BA867B]">Hypergraph Explorer</span>
             </h2>
-            <p className="text-2xl text-gray-700 mb-20 leading-tight px-4">
-              Immutable consent records, automated data subject rights, and verifiable audit trails
+            <p className="text-2xl text-gray-700 mb-8 leading-tight px-4">
+              Immutable consent records, automated data subject rights, and comprehensive blockchain explorer
               powered by Constellation Network's feeless architecture
             </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto">
+              <div className="p-4 border-2 border-[#BA867B] bg-gray-50" style={{ borderRight: '4px solid #8b675a', borderBottom: '4px solid #8b675a' }}>
+                <h3 className="text-xl font-bold text-black mb-2 uppercase">GDPR Compliance</h3>
+                <p className="text-gray-700 text-sm">Consent management & data subject rights</p>
+              </div>
+              <div className="p-4 border-2 border-[#BA867B] bg-gray-50" style={{ borderRight: '4px solid #8b675a', borderBottom: '4px solid #8b675a' }}>
+                <h3 className="text-xl font-bold text-black mb-2 uppercase">Hypergraph Explorer</h3>
+                <p className="text-gray-700 text-sm">Network stats, wallets, transactions & nodes</p>
+              </div>
+              <div className="p-4 border-2 border-[#BA867B] bg-gray-50" style={{ borderRight: '4px solid #8b675a', borderBottom: '4px solid #8b675a' }}>
+                <h3 className="text-xl font-bold text-black mb-2 uppercase">Metagraphs</h3>
+                <p className="text-gray-700 text-sm">DOR & PACA statistics with charts</p>
+              </div>
+            </div>
             <button
               onClick={() => setShowDashboard(true)}
               className="px-4 py-2 bg-[#BA867B] text-white text-3xl font-bold uppercase hover:opacity-90 transition-all duration-200"
