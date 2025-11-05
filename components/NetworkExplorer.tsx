@@ -13,6 +13,18 @@ import {
   type Transaction,
   type Node,
 } from '@/lib/api/constellation';
+import {
+  getL0SnapshotMetrics,
+  getTransactionMetrics,
+  type L0SnapshotMetric,
+  type TransactionMetric,
+} from '@/lib/services/api-dagscan-request';
+import { ChartL0Snapshots } from '@/components/chart-l0-snapshots';
+import { ChartSnapshotFees } from '@/components/chart-snapshot-fees';
+import { ChartTransactionCount } from '@/components/chart-transaction-count';
+import { ChartTransactionVolume } from '@/components/chart-transaction-volume';
+import { LatestL0Snapshots } from '@/components/latest-l0-snapshots';
+import { DAGTransactionsTable } from '@/components/dag-transactions-table';
 
 interface NetworkExplorerProps {
   initialTab?: 'overview' | 'wallets' | 'snapshots' | 'transactions' | 'nodes';
@@ -26,6 +38,8 @@ export default function NetworkExplorer({ initialTab = 'overview' }: NetworkExpl
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [nodes, setNodes] = useState<Node[]>([]);
   const [loading, setLoading] = useState(false);
+  const [l0SnapshotMetrics, setL0SnapshotMetrics] = useState<L0SnapshotMetric[]>([]);
+  const [transactionMetrics, setTransactionMetrics] = useState<TransactionMetric[]>([]);
 
   useEffect(() => {
     if (initialTab) {
@@ -36,6 +50,25 @@ export default function NetworkExplorer({ initialTab = 'overview' }: NetworkExpl
   useEffect(() => {
     loadData();
   }, [activeTab]);
+
+  useEffect(() => {
+    if (activeTab === 'overview') {
+      loadOverviewData();
+    }
+  }, [activeTab]);
+
+  const loadOverviewData = async () => {
+    try {
+      const [l0Metrics, txMetrics] = await Promise.all([
+        getL0SnapshotMetrics(),
+        getTransactionMetrics(),
+      ]);
+      setL0SnapshotMetrics(l0Metrics);
+      setTransactionMetrics(txMetrics);
+    } catch (error) {
+      console.error('Error loading overview data:', error);
+    }
+  };
 
   const loadData = async () => {
     setLoading(true);
@@ -109,8 +142,11 @@ export default function NetworkExplorer({ initialTab = 'overview' }: NetworkExpl
       ) : (
         <>
           {/* Overview Tab */}
-          {activeTab === 'overview' && networkStats && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {activeTab === 'overview' && (
+            <div className="space-y-8">
+              {/* Network Stats Cards */}
+              {networkStats && (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
               <div className="p-6 bg-gray-50 border-2 border-[#BA867B]" style={{ borderRight: '6px solid #8b675a', borderBottom: '6px solid #8b675a' }}>
                 <h4 className="font-bold text-xl text-black mb-2 uppercase">Total Transactions</h4>
                 <p className="text-4xl font-bold text-[#BA867B]">{networkStats.totalTransactions.toLocaleString()}</p>
@@ -137,6 +173,27 @@ export default function NetworkExplorer({ initialTab = 'overview' }: NetworkExpl
                   <p className="text-4xl font-bold text-[#BA867B]">{networkStats.networkHashRate}</p>
                 </div>
               )}
+                </div>
+              )}
+
+              {/* Charts Section */}
+              <div className="space-y-6">
+                <h3 className="text-3xl font-bold text-black uppercase tracking-wide">Network Statistics</h3>
+                
+                {/* Charts Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <ChartL0Snapshots metrics={l0SnapshotMetrics} />
+                  <ChartSnapshotFees metrics={l0SnapshotMetrics} />
+                  <ChartTransactionCount metrics={transactionMetrics} />
+                  <ChartTransactionVolume metrics={transactionMetrics} />
+                </div>
+
+                {/* Tables Section */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+                  <LatestL0Snapshots />
+                  <DAGTransactionsTable />
+                </div>
+              </div>
             </div>
           )}
 

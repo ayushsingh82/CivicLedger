@@ -35,14 +35,14 @@ export function ChartSnapshotFees({ metrics }: ChartSnapshotFeesProps) {
             <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
             <XAxis
               dataKey="date"
-              tick={{ fontSize: 10, fill: '#6b7280' }}
+              tick={{ fontSize: 10, fill: '#000000', fontWeight: 'bold' }}
               angle={-45}
               textAnchor="end"
               height={60}
             />
             <YAxis
-              tick={{ fontSize: 10, fill: '#6b7280' }}
-              label={{ value: 'DAG', angle: -90, position: 'insideLeft', style: { textAnchor: 'middle', fill: '#374151' } }}
+              tick={{ fontSize: 10, fill: '#000000', fontWeight: 'bold' }}
+              label={{ value: 'DAG', angle: -90, position: 'insideLeft', style: { textAnchor: 'middle', fill: '#000000', fontWeight: 'bold' } }}
             />
             <Tooltip
               contentStyle={{
@@ -57,7 +57,7 @@ export function ChartSnapshotFees({ metrics }: ChartSnapshotFeesProps) {
           </BarChart>
         </ResponsiveContainer>
       </div>
-      <p className="text-sm text-gray-600 italic">Total snapshot fees consumed: {total.toFixed(2)} $DAG</p>
+      <p className="text-sm text-black italic font-bold">Total snapshot fees consumed: {total.toFixed(2)} $DAG</p>
     </div>
   );
 }

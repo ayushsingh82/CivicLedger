@@ -107,41 +107,20 @@ export default function Home() {
         {/* Sidebar */}
         <aside className="w-64 border-r-4 border-[#BA867B] bg-gray-50 min-h-[calc(100vh-73px)] sticky top-[73px]">
           <nav className="p-6 space-y-2">
-            <p className="text-xs text-gray-500 mb-4 uppercase font-bold">PrivacyLedger</p>
-            {[
-              { id: 'consent', label: 'Consent Management', icon: '📝' },
-              { id: 'rights', label: 'Data Subject Rights', icon: '⚖️' },
-              { id: 'audit', label: 'Audit Dashboard', icon: '📊' },
-            ].map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`w-full flex items-center space-x-3 px-4 py-3 font-bold uppercase transition-colors ${
-                  activeTab === tab.id
-                    ? 'bg-[#BA867B] text-white'
-                    : 'text-gray-700 hover:bg-[#BA867B] hover:text-white'
-                }`}
-                style={{ borderRight: activeTab === tab.id ? '4px solid #8b675a' : 'none', borderBottom: activeTab === tab.id ? '4px solid #8b675a' : 'none' }}
-              >
-                <span className="text-2xl">{tab.icon}</span>
-                <span className="text-left tracking-wide">{tab.label}</span>
-              </button>
-            ))}
-            <div className="pt-6 border-t-4 border-gray-400 mt-6">
-              <p className="text-xs text-gray-500 mb-4 uppercase font-bold">Hypergraph</p>
-              <button
-                onClick={() => setActiveTab('hypergraph')}
-                className={`w-full flex items-center space-x-3 px-4 py-3 font-bold uppercase transition-colors ${
-                  activeTab === 'hypergraph' || activeTab === 'overview' || activeTab === 'wallets' || activeTab === 'snapshots' || activeTab === 'transactions' || activeTab === 'nodes'
-                    ? 'bg-[#BA867B] text-white'
-                    : 'text-gray-700 hover:bg-[#BA867B] hover:text-white'
-                }`}
-                style={{ borderRight: (activeTab === 'hypergraph' || activeTab === 'overview' || activeTab === 'wallets' || activeTab === 'snapshots' || activeTab === 'transactions' || activeTab === 'nodes') ? '4px solid #8b675a' : 'none', borderBottom: (activeTab === 'hypergraph' || activeTab === 'overview' || activeTab === 'wallets' || activeTab === 'snapshots' || activeTab === 'transactions' || activeTab === 'nodes') ? '4px solid #8b675a' : 'none' }}
-              >
-                <span className="text-2xl">🌐</span>
-                <span className="text-left tracking-wide">Hypergraph</span>
-              </button>
-            </div>
+            <p className="text-xs text-gray-500 mb-4 uppercase font-bold">Hypergraph</p>
+            <button
+              onClick={() => setActiveTab('hypergraph')}
+              className={`w-full flex items-center space-x-3 px-4 py-3 font-bold uppercase transition-colors ${
+                activeTab === 'hypergraph' || activeTab === 'overview' || activeTab === 'wallets' || activeTab === 'snapshots' || activeTab === 'transactions' || activeTab === 'nodes'
+                  ? 'bg-[#BA867B] text-white'
+                  : 'text-gray-700 hover:bg-[#BA867B] hover:text-white'
+              }`}
+              style={{ borderRight: (activeTab === 'hypergraph' || activeTab === 'overview' || activeTab === 'wallets' || activeTab === 'snapshots' || activeTab === 'transactions' || activeTab === 'nodes') ? '4px solid #8b675a' : 'none', borderBottom: (activeTab === 'hypergraph' || activeTab === 'overview' || activeTab === 'wallets' || activeTab === 'snapshots' || activeTab === 'transactions' || activeTab === 'nodes') ? '4px solid #8b675a' : 'none' }}
+            >
+              <span className="text-2xl">🌐</span>
+              <span className="text-left tracking-wide">Hypergraph</span>
+            </button>
+
             <div className="pt-6 border-t-4 border-gray-400 mt-6">
               <p className="text-xs text-gray-500 mb-4 uppercase font-bold">Metagraphs</p>
               <button
@@ -156,6 +135,29 @@ export default function Home() {
                 <span className="text-2xl">🌐</span>
                 <span className="text-left tracking-wide">Metagraphs</span>
               </button>
+            </div>
+
+            <div className="pt-6 border-t-4 border-gray-400 mt-6">
+              <p className="text-xs text-gray-500 mb-4 uppercase font-bold">PrivacyLedger</p>
+              {[
+                { id: 'consent', label: 'Consent Management', icon: '📝' },
+                { id: 'rights', label: 'Data Subject Rights', icon: '⚖️' },
+                { id: 'audit', label: 'Audit Dashboard', icon: '📊' },
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`w-full flex items-center space-x-3 px-4 py-3 font-bold uppercase transition-colors ${
+                    activeTab === tab.id
+                      ? 'bg-[#BA867B] text-white'
+                      : 'text-gray-700 hover:bg-[#BA867B] hover:text-white'
+                  }`}
+                  style={{ borderRight: activeTab === tab.id ? '4px solid #8b675a' : 'none', borderBottom: activeTab === tab.id ? '4px solid #8b675a' : 'none' }}
+                >
+                  <span className="text-2xl">{tab.icon}</span>
+                  <span className="text-left tracking-wide">{tab.label}</span>
+                </button>
+              ))}
             </div>
           </nav>
         </aside>
