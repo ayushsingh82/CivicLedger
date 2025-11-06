@@ -1,32 +1,96 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import NetworkExplorer from '@/components/NetworkExplorer';
 import MetagraphExplorer from '@/components/MetagraphExplorer';
+import { useConstellation } from '@/hooks/useConstellation';
+import type { ConsentRecord, DataRequest } from '@/lib/constellation';
 
 export default function Home() {
   const [showDashboard, setShowDashboard] = useState(false);
   const [activeTab, setActiveTab] = useState('consent');
-  const [consents, setConsents] = useState([
-    { id: 1, type: 'Marketing Emails', status: 'Granted', timestamp: '2025-01-15 10:30:00', hash: '0x1a2b3c...' },
-    { id: 2, type: 'Analytics Cookies', status: 'Granted', timestamp: '2025-01-15 10:32:00', hash: '0x4d5e6f...' },
-    { id: 3, type: 'Third-party Sharing', status: 'Revoked', timestamp: '2025-01-16 14:20:00', hash: '0x7g8h9i...' },
+  const [consents, setConsents] = useState<ConsentRecord[]>([
+    { id: '1', type: 'Marketing Emails', status: 'Granted', timestamp: '2025-01-15 10:30:00', hash: '0x1a2b3c...' },
+    { id: '2', type: 'Analytics Cookies', status: 'Granted', timestamp: '2025-01-15 10:32:00', hash: '0x4d5e6f...' },
+    { id: '3', type: 'Third-party Sharing', status: 'Revoked', timestamp: '2025-01-16 14:20:00', hash: '0x7g8h9i...' },
   ]);
+  const [dataRequests, setDataRequests] = useState<DataRequest[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
-  const handleConsentAction = (action: 'grant' | 'revoke', type: string) => {
-    const newConsent = {
-      id: consents.length + 1,
-      type,
-      status: action === 'grant' ? 'Granted' : 'Revoked',
-      timestamp: new Date().toLocaleString(),
-      hash: '0x' + Math.random().toString(16).substr(2, 8) + '...',
-    };
-    setConsents([...consents, newConsent]);
+  const { connected, connect, recordConsent, recordDataRequest, generateAuditReport } = useConstellation();
+
+  // Auto-connect when dashboard is shown
+  useEffect(() => {
+    if (showDashboard && !connected) {
+      connect();
+    }
+  }, [showDashboard, connected, connect]);
+
+  // Show message and auto-hide after 3 seconds
+  useEffect(() => {
+    if (message) {
+      const timer = setTimeout(() => setMessage(null), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [message]);
+
+  const handleConsentAction = async (action: 'grant' | 'revoke', type: string) => {
+    if (!connected) {
+      setMessage({ type: 'error', text: 'Please connect to Constellation Network first' });
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const consentRecord = await recordConsent({
+        type,
+        status: action === 'grant' ? 'Granted' : 'Revoked',
+        timestamp: new Date().toISOString(),
+      });
+
+      setConsents([consentRecord, ...consents]);
+      setMessage({
+        type: 'success',
+        text: `Consent ${action === 'grant' ? 'granted' : 'revoked'} successfully! Hash: ${consentRecord.hash.substring(0, 12)}...`,
+      });
+    } catch (error) {
+      setMessage({
+        type: 'error',
+        text: error instanceof Error ? error.message : 'Failed to record consent',
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleDataRequest = (type: string) => {
-    alert(`${type} request submitted! It will be processed within 30 days per GDPR requirements.`);
+  const handleDataRequest = async (type: string, actionType: string) => {
+    if (!connected) {
+      setMessage({ type: 'error', text: 'Please connect to Constellation Network first' });
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const request = await recordDataRequest({
+        type,
+        timestamp: new Date().toISOString(),
+      });
+
+      setDataRequests([request, ...dataRequests]);
+      setMessage({
+        type: 'success',
+        text: `${actionType} request submitted! Hash: ${request.hash.substring(0, 12)}... It will be processed within 30 days per GDPR requirements.`,
+      });
+    } catch (error) {
+      setMessage({
+        type: 'error',
+        text: error instanceof Error ? error.message : 'Failed to submit data request',
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Landing Page
@@ -155,10 +219,15 @@ export default function Home() {
         <div className="px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-3">
-              
               <div>
                 <h1 className="text-xl font-bold text-black tracking-wide">CivicLedger</h1>
                 <p className="text-xs font-medium text-black">Powered by Constellation Network</p>
+              </div>
+              <div className="ml-4 flex items-center space-x-2">
+                <div className={`w-3 h-3 rounded-full ${connected ? 'bg-green-500' : 'bg-gray-400'}`} />
+                <span className="text-xs font-bold uppercase text-black">
+                  {connected ? 'Connected ✓' : 'Connecting...'}
+                </span>
               </div>
             </div>
             <button
@@ -170,6 +239,24 @@ export default function Home() {
             </button>
           </div>
         </div>
+        {/* Message Notification */}
+        {message && (
+          <div className={`px-4 sm:px-6 lg:px-8 py-3 ${
+            message.type === 'success' ? 'bg-green-100 border-t-2 border-green-500' : 'bg-red-100 border-t-2 border-red-500'
+          }`}>
+            <div className="flex items-center justify-between">
+              <p className={`text-sm font-bold ${message.type === 'success' ? 'text-green-800' : 'text-red-800'}`}>
+                {message.text}
+              </p>
+              <button
+                onClick={() => setMessage(null)}
+                className="text-lg font-bold"
+              >
+                ×
+              </button>
+            </div>
+          </div>
+        )}
       </header>
 
       <div className="flex">
@@ -252,17 +339,19 @@ export default function Home() {
                         <div className="flex space-x-2">
                           <button
                             onClick={() => handleConsentAction('grant', type)}
-                            className="flex-1 px-4 py-2 bg-[#8B7355] text-white font-bold uppercase hover:opacity-90 transition-colors"
+                            disabled={loading || !connected}
+                            className="flex-1 px-4 py-2 bg-[#8B7355] text-white font-bold uppercase hover:opacity-90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             style={{ borderRight: '4px solid black', borderBottom: '4px solid black' }}
                           >
-                            Grant
+                            {loading ? 'Processing...' : 'Grant'}
                           </button>
                           <button
                             onClick={() => handleConsentAction('revoke', type)}
-                            className="flex-1 px-4 py-2 border-2 border-[#8B7355] text-[#8B7355] font-bold uppercase hover:bg-[#8B7355] hover:text-white transition-colors"
+                            disabled={loading || !connected}
+                            className="flex-1 px-4 py-2 border-2 border-[#8B7355] text-[#8B7355] font-bold uppercase hover:bg-[#8B7355] hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             style={{ borderRight: '4px solid black', borderBottom: '4px solid black' }}
                           >
-                            Revoke
+                            {loading ? 'Processing...' : 'Revoke'}
                           </button>
                         </div>
                       </div>
@@ -287,7 +376,7 @@ export default function Home() {
                         <div>
                           <p className="font-bold text-black uppercase tracking-wide">{consent.type}</p>
                           <p className="text-sm text-gray-600">
-                            {consent.timestamp}
+                            {new Date(consent.timestamp).toLocaleString()}
                           </p>
                         </div>
                       </div>
@@ -312,7 +401,7 @@ export default function Home() {
               <h3 className="text-3xl font-bold text-black mb-8 uppercase tracking-wide">
                 Exercise Your GDPR Rights
               </h3>
-              <div className="space-y-6">
+              <div className="space-y-6 mb-8">
                 {[
                   {
                     icon: '📄',
@@ -347,16 +436,59 @@ export default function Home() {
                         </div>
                       </div>
                       <button
-                        onClick={() => handleDataRequest(right.title)}
-                        className="px-8 py-3 bg-[#8B7355] text-white font-bold uppercase hover:opacity-90 transition-colors whitespace-nowrap text-lg"
+                        onClick={() => handleDataRequest(right.title, right.action)}
+                        disabled={loading || !connected}
+                        className="px-8 py-3 bg-[#8B7355] text-white font-bold uppercase hover:opacity-90 transition-colors whitespace-nowrap text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                         style={{ borderRight: '4px solid black', borderBottom: '4px solid black' }}
                       >
-                        {right.action}
+                        {loading ? 'Processing...' : right.action}
                       </button>
                     </div>
                   </div>
                 ))}
               </div>
+
+              {/* Data Requests History */}
+              {dataRequests.length > 0 && (
+                <div>
+                  <h3 className="text-3xl font-bold text-black mb-6 uppercase tracking-wide">
+                    Data Request History
+                  </h3>
+                  <div className="space-y-3">
+                    {dataRequests.map((request) => (
+                      <div
+                        key={request.id}
+                        className="p-4 bg-[#FFF8E7] border-2 border-gray-400 flex items-center justify-between hover:shadow-md transition-shadow"
+                        style={{ borderRight: '4px solid #000', borderBottom: '4px solid #000' }}
+                      >
+                        <div className="flex items-center space-x-4">
+                          <div className="w-3 h-3 bg-[#8B7355]" />
+                          <div>
+                            <p className="font-bold text-black uppercase tracking-wide">{request.type}</p>
+                            <p className="text-sm text-gray-600">
+                              {new Date(request.timestamp).toLocaleString()}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex items-center space-x-4">
+                          <span className={`px-3 py-1 uppercase text-sm font-bold border-2 ${
+                            request.status === 'Completed' 
+                              ? 'bg-green-200 text-green-700 border-green-600'
+                              : request.status === 'Processing'
+                              ? 'bg-yellow-200 text-yellow-700 border-yellow-600'
+                              : 'bg-gray-200 text-gray-700 border-gray-600'
+                          }`}>
+                            {request.status}
+                          </span>
+                          <code className="text-xs text-gray-600 bg-white border-2 border-gray-400 px-2 py-1 font-mono">
+                            {request.hash.substring(0, 16)}...
+                          </code>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
@@ -372,9 +504,13 @@ export default function Home() {
                     <h4 className="font-bold text-2xl text-black uppercase tracking-wide">Compliance Score</h4>
                     <span className="text-4xl">✅</span>
                   </div>
-                  <div className="text-5xl font-bold text-[#8B7355] mb-2">98%</div>
+                  <div className="text-5xl font-bold text-[#8B7355] mb-2">
+                    {consents.length > 0 
+                      ? Math.round((consents.filter(c => c.status === 'Granted').length / consents.length) * 100)
+                      : 100}%
+                  </div>
                   <p className="text-gray-700 uppercase font-bold tracking-wide">
-                    All consent records verified on-chain
+                    {consents.length} consent record{consents.length !== 1 ? 's' : ''} verified on-chain
                   </p>
                 </div>
 
@@ -383,10 +519,32 @@ export default function Home() {
                     <h4 className="font-bold text-2xl text-black uppercase tracking-wide">Active Data Requests</h4>
                     <span className="text-4xl">📋</span>
                   </div>
-                  <div className="text-5xl font-bold text-[#8B7355] mb-2">2</div>
+                  <div className="text-5xl font-bold text-[#8B7355] mb-2">
+                    {dataRequests.filter(r => r.status !== 'Completed').length}
+                  </div>
                   <p className="text-gray-700 uppercase font-bold tracking-wide">
-                    In progress (30-day SLA)
+                    {dataRequests.filter(r => r.status === 'Processing').length} in progress (30-day SLA)
                   </p>
+                </div>
+              </div>
+
+              {/* Statistics Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div className="p-6 bg-[#FFF8E7] border-2 border-[#8B7355]" style={{ borderRight: '4px solid black', borderBottom: '4px solid black' }}>
+                  <div className="text-3xl font-bold text-[#8B7355] mb-2">{consents.length}</div>
+                  <p className="text-gray-700 uppercase font-bold tracking-wide text-sm">Total Consents</p>
+                </div>
+                <div className="p-6 bg-[#FFF8E7] border-2 border-[#8B7355]" style={{ borderRight: '4px solid black', borderBottom: '4px solid black' }}>
+                  <div className="text-3xl font-bold text-[#8B7355] mb-2">
+                    {consents.filter(c => c.status === 'Granted').length}
+                  </div>
+                  <p className="text-gray-700 uppercase font-bold tracking-wide text-sm">Granted</p>
+                </div>
+                <div className="p-6 bg-[#FFF8E7] border-2 border-[#8B7355]" style={{ borderRight: '4px solid black', borderBottom: '4px solid black' }}>
+                  <div className="text-3xl font-bold text-[#8B7355] mb-2">
+                    {consents.filter(c => c.status === 'Revoked').length}
+                  </div>
+                  <p className="text-gray-700 uppercase font-bold tracking-wide text-sm">Revoked</p>
                 </div>
               </div>
 
